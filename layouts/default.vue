@@ -197,21 +197,22 @@ export default {
             {
               title: 'Sites',
               icon: 'sitemap-outline',
-              to:'sites'
+              to:'/sites'
             },
             {
               title: 'Meter',
               icon: 'gauge',
-              to:'meters'
+              to:'/meters'
             },
             {
               title: 'Meter Types',
               icon: 'gauge',
-              to:'meters/types'
+              to:'/meters/types'
             },
             {
               title: 'Customer',
-              icon: 'account-group'
+              icon: 'account-group',
+              to: '/customers'
             },
             {
               title: 'POC',
