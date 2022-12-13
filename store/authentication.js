@@ -34,6 +34,13 @@ const actions = {
         commit('AUTHENTICATE_ERROR')
       })
   },
+  async _createnewuser ({ dispatch }, payload) {
+    await this.$api.$post('/auth/signup', payload)
+      .then((response) => {
+        dispatch("_fetchusers", null, { root: true });
+      }).catch((err) => {
+      })
+  },
 
   async _logoutsession ({ commit }) {
     await commit('LOGOUT_SESSION')

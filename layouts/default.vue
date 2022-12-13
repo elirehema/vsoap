@@ -52,7 +52,7 @@
             v-for="child in item.menus"
             :key="child.title"
             :to="child.to"
-            color="primary"
+            color="white"
             class="pl-4"
           >
             <v-list-item-icon>
@@ -191,16 +191,23 @@ export default {
           ]
         },
         {
-          title: 'Archive',
+          title: 'Properties',
           icon: 'bookshelf',
           menus: [
             {
-              title: 'Power Grid',
-              icon: 'sitemap-outline'
+              title: 'Sites',
+              icon: 'sitemap-outline',
+              to:'sites'
             },
             {
               title: 'Meter',
-              icon: 'gauge'
+              icon: 'gauge',
+              to:'meters'
+            },
+            {
+              title: 'Meter Types',
+              icon: 'gauge',
+              to:'meters/types'
             },
             {
               title: 'Customer',

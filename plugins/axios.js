@@ -19,7 +19,7 @@ export default function ({ $axios, redirect, store, $toast }, inject) {
     const token = localStorage.getItem('accessToken')
     //api.setHeader('Content-Type', 'application/json')
     // api.setHeader("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With");
-    // api.setHeader("Access-Control-Allow-Origin", "*");
+     //api.setHeader("Access-Control-Allow-Origin", "*");
     //api.setHeader('Cache-Control: no-cache, no-store, must-revalidate');
     //api.setHeader('Pragma: no-cache');
     //api.setHeader('Expires: 0');

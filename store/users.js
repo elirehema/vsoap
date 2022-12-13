@@ -24,6 +24,14 @@ const actions = {
       }).catch((err) => {
         commit('GET_USERS_ERROR', err)
       })
+  },
+
+  async _updateuserinformation ({ dispatch }, payload) {
+    await this.$api.$put(`/users/${payload.id}`, payload)
+      .then((response) => {
+        dispatch("_fetchusers", null, { root: true });
+      }).catch((err) => {
+      })
   }
 }
 

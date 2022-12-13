@@ -1,16 +1,16 @@
-const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/ems/' : '/'
-
+const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/ssap/' : '/';
+import metajs from './plugins/meta';
+const meta = metajs();
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
+  //target: 'static',
+  telemetry: true,
   ssr: false,
-
-  // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
   router: {
     mode: 'hash',
     base: routerBase,
-    routerNameSplitter: '/',
-    //middleware: ['router']
+    routerNameSplitter: "/",
+   // middleware: ['router']
   },
   loadingIndicator: {
     name: 'pulse',
@@ -19,80 +19,148 @@ export default {
   },
 
   env: {
-    baseUrl: 'http://localhost:8080/api/v1',
-    localUrl: 'http://localhost:8080/api/v1'
+    baseUrl: 'http://localhost:8082/api/v1',
+    localUrl: 'http://localhost:8082/api/v1'
   },
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - dashboard',
-    title: 'dashboard',
-    htmlAttrs: {
-      lang: 'en'
-    },
+    titleTemplate: 'NexisIot',
+    title: 'NexisIOT',
     meta: [
+      ...meta,
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      /**Windows phone **/
+      { name: "msapplication-navbutton-color", content: "#A0D18C" },
+      /**iOS Safari**/
+      { name: "apple-mobile-web-app-status-bar-style", content: "#A0D18C" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+      { hid: 'description', name: 'description', content: 'Amala Yangu self-service Web Application' },
+
+      //Twitter meta-data
+      { hid: "twitter:site", name: "twitter:site", content: "AmalaApp" },
+      { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
+      { hid: "twitter:image:alt", name: "twitter:image:alt", content: "Ospic application" },
+
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '@/assets/css/styles.css'
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/vuetify.js',
-    //'~/plugins/axios.js',
+    '~/plugins/axios',
+    '~/plugins/filters.js',
+    '~/plugins/pwa.client.js',
+    '~/mixins/mixins.js',
     '~/plugins/vuepersistence.js'
+
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
+  // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/style-resources',
-    '@nuxt/postcss8'
+    '@nuxtjs/toast',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
+  // Modules (https://go.nuxtjs.dev/config-modules)
+  // https://go.nuxtjs.dev/axios
+  // https://go.nuxtjs.dev/pwa
+
   modules: [
-    // https://go.nuxtjs.dev/axios
-   // '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/toast',
+    'nuxt-material-design-icons',
+    ['cookie-universal-nuxt', { parseJSON: false }],
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:8081/api/v1',
-    proxy: true
+  toast: {
+    position: 'bottom-right',
+    duration: 4000,
+    theme: 'bubble',
+    singleton: true,
+    iconPack: 'mdi'
   },
-  proxy: {
-    '/api/': 'http://localhost:8081/api/v1'
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    /*
+     ** You can extend webpack config here
+     */
+    publicPath: process.env.NODE_ENV === 'production' ? '/assets/' : '',
+    extend(config, ctx) { },
     postcss: {
-      plugins: {
-      },
       preset: {
+        features: {
+          customProperties: false
+        }
+      }
+    },
+    terser: {
+      extractComments: false, // default was LICENSES
+      // https://github.com/terser/terser#compress-options
+      //Disable console log in production
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
       }
     }
   },
+  pwa: {
+    manifest: {
+      name: 'Amala Yangu Web Application',
+      short_name: 'Amala Yangu',
+      color_theme: "#A0D18C",
+      background_color: "#A0D18C",
+      lang: 'en',
+      useWebmanifestExtension: false
+    },
+    meta: {
+      /* meta options */
+      name: "Amala Yangu",
+      author: "Amala",
+      description: "Amala Yangu self-service Web Application",
+      lang: "en",
+      ogType: "website",
+      ogSiteName: "Amala Yangu",
+      ogTitle: "Amala Yangu Web Application",
+      ogDescription: "Amala Yangu self-service Web Application",
+      ogHost: "https://amala.co.tz",
+      ogImage: "https://amalatechnologies.github.io/ssap/preview.png",
+      ogUrl: "",
+      twitterCard: "Amala Yangu",
+      twitterSite: "amalaApp",
+      mobileAppIOS: "yes",
+      appleStatusBarStyle: "black-translucent",
+      theme_color: "#A0D18C"
+
+
+    },
+    icon: {
+      iconSrc: '/static/maskable.png'
+    }
+  },
+
+  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+  axios: {},
+
+
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
+
   server: {
-    port: 8000,
-    host: '0.0.0.0'
+    port: 8000, // default: 3000
+    host: "0.0.0.0" // default: localhost
   }
 }
