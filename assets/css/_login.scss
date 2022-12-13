@@ -1,0 +1,29 @@
+.rectangle {
+    position: absolute !important;
+    width: 1495px;
+    height: 1103px;
+    left: 1190.5px;
+    top: -315px;
+    color: white !important;
+    background: $primary !important;
+    border-radius: 75px;
+    transform: rotate(30deg) !important;
+}
+
+.loginrectangle {
+    position: absolute !important;
+    width: 1495px;
+    height: 1103px;
+    left: -1201.71px;
+    top: -205px;
+
+    background: #EC1360;
+    border-radius: 75px;
+    transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+}
+.v-input__icon.v-input__icon--append{
+    i.v-icon{
+        size: 20px !important;
+        color: #04C401 !important;
+    }
+}
