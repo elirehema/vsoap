@@ -19,8 +19,8 @@ export default {
   },
 
   env: {
-    baseUrl: 'http://localhost:8082/api/v1',
-    localUrl: 'http://localhost:8082/api/v1'
+    baseUrl: 'http://localhost:8083/api/v1',
+    localUrl: 'http://localhost:8083/api/v1'
   },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)

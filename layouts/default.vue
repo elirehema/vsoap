@@ -214,7 +214,7 @@ export default {
               icon: 'account-group',
               to: '/customers'
             },
-            {
+           /**  {
               title: 'POC',
               icon: 'map-marker-path'
             },
@@ -249,7 +249,7 @@ export default {
             {
               title: 'Help Desk',
               icon: 'information'
-            }
+            }**/
           ]
         },
         {
@@ -260,7 +260,22 @@ export default {
         {
           title: 'Service Request',
           icon: 'cloud-download',
-          menus: []
+          menus: [
+            {
+              title: 'Products',
+              icon: 'package-variant',
+              to: 'products'
+            },
+            {
+              title: 'Orders',
+              icon: 'cart-check',
+              to: 'orders'
+            },
+            {
+              title: 'Invoices',
+              icon: 'receipt-text-check'
+            }
+          ]
         },
         {
           title: 'Analytics',
