@@ -19,8 +19,8 @@ export default {
   },
 
   env: {
-    baseUrl: 'http://localhost:8083/api/v1',
-    localUrl: 'http://localhost:8083/api/v1'
+    baseUrl: 'http://localhost:8082/api/v1',
+    localUrl: 'http://localhost:8082/api/v1'
   },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -57,7 +57,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/vuetify.js',
-    '~/plugins/axios',
+    '~/plugins/aaxios',
     '~/plugins/filters.js',
     '~/plugins/pwa.client.js',
     '~/mixins/mixins.js',
@@ -154,8 +154,14 @@ export default {
   },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
-
+  axios: {
+    proxy: true
+   // baseUrl: 'http://localhost:8083/api/v1'
+  },
+  proxy:{
+    
+    '/api/': {target: "http://localhost:8080/api/v1", pathRewrite: {'^/api/': ''} }
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
 

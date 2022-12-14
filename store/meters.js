@@ -18,8 +18,9 @@ const state = () => ({
   const actions = {
     async _fetchmeters ({ commit }) {
       commit('GET_METERS')
-      await this.$api.$get('/meters')
+      await this.$axios.$get('/api/meters')
         .then((response) => {
+          console.log(response)
           commit('GET_METERS_SUCCESS', response)
         }).catch((err) => {
           commit('GET_METERS_ERROR', err)
@@ -27,14 +28,14 @@ const state = () => ({
     },
   
     async _addnewmeter({ dispatch }, payload) {
-        await this.$api.$post('/meters', payload)
+        await this.$axios.$post('/api/meters', payload)
           .then((response) => {
             dispatch("_fetchmeters", null, { root: true });
           }).catch((err) => {
           })
       },
     async _updatemeterinformation ({ dispatch }, payload) {
-      await this.$api.$put(`/meters/${payload.id}`, payload)
+      await this.$axios.$put(`/api/meters/${payload.id}`, payload)
         .then((response) => {
           dispatch("_fetchmeters", null, { root: true });
         }).catch((err) => {

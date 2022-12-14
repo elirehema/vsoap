@@ -18,7 +18,7 @@ const state = () => ({
   const actions = {
     async _fetchsites ({ commit }) {
       commit('GET_SITES')
-      await this.$api.$get('/sites')
+      await this.$axios.$get('/api/sites')
         .then((response) => {
           commit('GET_SITES_SUCCESS', response)
         }).catch((err) => {
@@ -27,14 +27,14 @@ const state = () => ({
     },
   
     async _createnewsite ({ dispatch }, payload) {
-        await this.$api.$post('/sites', payload)
+        await this.$axios.$post('/api/sites', payload)
           .then((response) => {
             dispatch("_fetchsites", null, { root: true });
           }).catch((err) => {
           })
       },
     async _updatesiteinformation ({ dispatch }, payload) {
-      await this.$api.$put(`/sites/${payload.id}`, payload)
+      await this.$axios.$put(`/api/sites/${payload.id}`, payload)
         .then((response) => {
           dispatch("_fetchsites", null, { root: true });
         }).catch((err) => {

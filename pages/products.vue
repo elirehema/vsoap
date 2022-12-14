@@ -7,8 +7,8 @@
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-toolbar flat>
-        <v-toolbar-title>Products</v-toolbar-title>
+      <v-toolbar color="primary" flat>
+        <v-toolbar-title class="text-h4 white--text">Products</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">

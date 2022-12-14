@@ -18,7 +18,7 @@ const state = () => ({
   const actions = {
     async _fetchmetertypes ({ commit }) {
       commit('GET_TYPES')
-      await this.$api.$get('/meters/types')
+      await this.$axios.$get('/api/meters/types')
         .then((response) => {
           commit('GET_TYPES_SUCCESS', response)
         }).catch((err) => {
@@ -27,14 +27,14 @@ const state = () => ({
     },
   
     async _addnewmetertype({ dispatch }, payload) {
-        await this.$api.$post('/meters/types', payload)
+        await this.$axios.$post('/api/meters/types', payload)
           .then((response) => {
             dispatch("_fetchmetertypes", null, { root: true });
           }).catch((err) => {
           })
       },
     async _updatemetertype ({ dispatch }, payload) {
-      await this.$api.$put(`/meters/types/${payload.id}`, payload)
+      await this.$axios.$put(`/api/meters/types/${payload.id}`, payload)
         .then((response) => {
           dispatch("_fetchmetertypes", null, { root: true });
         }).catch((err) => {

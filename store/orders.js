@@ -18,7 +18,7 @@ const state = () => ({
   const actions = {
     async _fetchorders ({ commit }) {
       commit('GET_ORDERS')
-      await this.$api.$get('/orders')
+      await this.$axios.$get('/api/orders')
         .then((response) => {
           commit('GET_ORDERS_SUCCESS', response)
         }).catch((err) => {
@@ -27,14 +27,14 @@ const state = () => ({
     },
   
     async _addnewproduct({ dispatch }, payload) {
-        await this.$api.$post('/orders', payload)
+        await this.$axios.$post('/api/orders', payload)
           .then((response) => {
             dispatch("_fetchorders", null, { root: true });
           }).catch((err) => {
           })
       },
     async _updateproduct ({ dispatch }, payload) {
-      await this.$api.$put(`/orders/${payload.id}`, payload)
+      await this.$axios.$put(`/api/orders/${payload.id}`, payload)
         .then((response) => {
           dispatch("_fetchorders", null, { root: true });
         }).catch((err) => {

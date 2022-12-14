@@ -18,7 +18,7 @@ const mutations = {
 const actions = {
   async _fetchusers ({ commit }) {
     commit('GET_USERS')
-    await this.$api.$get('/users')
+    await this.$axios.$get('/api/users')
       .then((response) => {
         commit('GET_USERS_SUCCESS', response)
       }).catch((err) => {
@@ -27,7 +27,7 @@ const actions = {
   },
 
   async _updateuserinformation ({ dispatch }, payload) {
-    await this.$api.$put(`/users/${payload.id}`, payload)
+    await this.$axios.$put(`/api/users/${payload.id}`, payload)
       .then((response) => {
         dispatch("_fetchusers", null, { root: true });
       }).catch((err) => {

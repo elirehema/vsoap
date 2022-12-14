@@ -17,18 +17,21 @@ export default function ({ $axios, redirect, store, $toast }, inject) {
 
   api.onRequest((config) => {
     const token = localStorage.getItem('accessToken')
-    //api.setHeader('Content-Type', 'application/json')
+    api.setHeader('Content-Type', 'application/json')
+    //api.setHeader('crossorigin','true')
+    //api.setHeader("Access-Control-Allow-Origin", "*");
+    api.setHeader("Access-Control-Allow-Credentials", "true")
     // api.setHeader("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With");
-     //api.setHeader("Access-Control-Allow-Origin", "*");
-    //api.setHeader('Cache-Control: no-cache, no-store, must-revalidate');
+   
+    api.setHeader('Cache-Control: no-cache, no-store, must-revalidate');
     //api.setHeader('Pragma: no-cache');
     //api.setHeader('Expires: 0');
-    //api.setHeader('X-User', 'user::username')
+    //api.setHeader('Cookie', 'user::username')
     if (token == null) {
       store.dispatch('_logoutsession')
     }
     if (config.url != '/auth/signin') {
-      //api.setHeader('Authorization', 'Bearer ' + token)
+      api.setHeader('Authorization', 'Bearer ' + token)
     }
   })
 
@@ -54,7 +57,7 @@ export default function ({ $axios, redirect, store, $toast }, inject) {
   /* api.setBaseURL(  process.env.baseUrl ); */
 
   /** For production */
-  api.setBaseURL(process.env.NODE_ENV === 'production' ? process.env.baseUrl : process.env.localUrl)
+  api.setBaseURL('http://localhost:8083/api/v1')
   // Inject to context as $api
   inject('api', api)
 }

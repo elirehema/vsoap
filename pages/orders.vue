@@ -7,8 +7,8 @@
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-toolbar flat>
-        <v-toolbar-title>Orders</v-toolbar-title>
+      <v-toolbar color="primary" flat>
+        <v-toolbar-title class="text-h4 white--text">Orders</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
@@ -37,7 +37,7 @@
 
             <v-card-text>
               <v-container>
-                <v-row v-for="order in ords">
+                <v-row v-for="order in ords" :key="order.productId">
                   <v-col  cols="12" sm="12" md="6">
                     <v-select
                       v-model="order.editedItem.productId"

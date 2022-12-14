@@ -7,9 +7,9 @@
   >
     <template v-slot:top>
       <v-toolbar
-        flat
+        flat color="primary"
       >
-        <v-toolbar-title>System Users</v-toolbar-title>
+        <v-toolbar-title class="text-h4 white--text">System Users</v-toolbar-title>
        
         <v-spacer></v-spacer>
         <v-dialog
@@ -33,7 +33,7 @@
       dark
     >
 
-      <v-toolbar-title><span class="text-h5">{{ formTitle }}</span></v-toolbar-title>
+      <v-toolbar-title class="text-h4 white--text"><span class="text-h5">{{ formTitle }}</span></v-toolbar-title>
 
       <v-spacer></v-spacer>
 

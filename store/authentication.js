@@ -19,14 +19,17 @@ const mutations = {
     localStorage.setItem('accessToken',
       payload.accessToken
     )
+    document.cookie = `current_subject=user::${payload.username}; SameSite=None; Secure`
+    //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+
     this.$router.push('/')
   }
 }
 const actions = {
   async _authenticate ({ commit, dispatch }, requestbody) {
     commit('AUTHENTICATE')
-    await this.$api
-      .$post('/auth/signin', requestbody)
+    await this.$axios
+      .$post('/api/auth/signin', requestbody)
       .then((response) => {
         commit('AUTHENTICATE_SUCCESS', response)
       })
@@ -35,7 +38,7 @@ const actions = {
       })
   },
   async _createnewuser ({ dispatch }, payload) {
-    await this.$api.$post('/auth/signup', payload)
+    await this.$axios.$post('/api/auth/signup', payload)
       .then((response) => {
         dispatch("_fetchusers", null, { root: true });
       }).catch((err) => {

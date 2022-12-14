@@ -18,7 +18,7 @@ const state = () => ({
   const actions = {
     async _fetchcustomers ({ commit }) {
       commit('GET_CUSTOMERS')
-      await this.$api.$get('/customers')
+      await this.$axios.$get('/api/customers')
         .then((response) => {
           commit('GET_CUSTOMERS_SUCCESS', response)
         }).catch((err) => {
@@ -27,14 +27,14 @@ const state = () => ({
     },
   
     async _addnewcustomer({ dispatch }, payload) {
-        await this.$api.$post('/customers', payload)
+        await this.$axios.$post('/api/customers', payload)
           .then((response) => {
             dispatch("_fetchcustomers", null, { root: true });
           }).catch((err) => {
           })
       },
     async _updatecustomer ({ dispatch }, payload) {
-      await this.$api.$put(`/customers/${payload.id}`, payload)
+      await this.$axios.$put(`/api/customers/${payload.id}`, payload)
         .then((response) => {
           dispatch("_fetchcustomers", null, { root: true });
         }).catch((err) => {

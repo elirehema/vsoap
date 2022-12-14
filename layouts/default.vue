@@ -273,7 +273,8 @@ export default {
             },
             {
               title: 'Invoices',
-              icon: 'receipt-text-check'
+              icon: 'receipt-text-check',
+              to: 'invoices'
             }
           ]
         },
