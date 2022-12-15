@@ -10,7 +10,7 @@ export default {
     mode: 'hash',
     base: routerBase,
     routerNameSplitter: "/",
-   // middleware: ['router']
+   middleware: ['router']
   },
   loadingIndicator: {
     name: 'pulse',
@@ -73,6 +73,8 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/toast',
+    '@nuxtjs/style-resources',
+    '@nuxt/postcss8',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -101,10 +103,9 @@ export default {
     publicPath: process.env.NODE_ENV === 'production' ? '/assets/' : '',
     extend(config, ctx) { },
     postcss: {
+      plugins: {
+      },
       preset: {
-        features: {
-          customProperties: false
-        }
       }
     },
     terser: {

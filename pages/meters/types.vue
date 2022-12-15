@@ -8,18 +8,20 @@
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h4 white--text">Meter Types</v-toolbar-title>
+        <v-toolbar-title class="text-h4 white--text"
+          >Meter Types</v-toolbar-title
+        >
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
-              dark
+              color="success"
               class="mb-2 font-weight-bold"
               v-bind="attrs"
               v-on="on"
             >
+              <v-icon left> mdi-plus </v-icon>
               Add Meter Type
             </v-btn>
           </template>

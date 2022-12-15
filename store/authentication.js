@@ -4,16 +4,16 @@ const state = () => ({
 })
 
 const mutations = {
-  'AUTHENTICATE' (state) {
+  ['AUTHENTICATE'] (state) {
     state.showLoader = true
   },
-  'AUTHENTICATE_FAILED' (state) {
+  ['AUTHENTICATE_FAILED'] (state) {
     state.showLoader = false
   },
-  'AUTHENTICATE_ERROR' (state) {
+  ['AUTHENTICATE_ERROR'] (state) {
     state.showLoader = false
   },
-  'AUTHENTICATE_SUCCESS' (state, payload) {
+  ['AUTHENTICATE_SUCCESS'] (state, payload) {
     state.showLoader = false
     state.accessToken = payload.accessToken
     localStorage.setItem('accessToken',
@@ -23,6 +23,11 @@ const mutations = {
     //document.cookie = "favorite_food=tripe; SameSite=None; Secure";
 
     this.$router.push('/')
+  },
+  ['LOGOUT_SESSION'](state){
+    window.localStorage.clear()
+    sessionStorage.clear()
+    this.$router.push('/signin')
   }
 }
 const actions = {
@@ -38,7 +43,7 @@ const actions = {
       })
   },
   async _createnewuser ({ dispatch }, payload) {
-    await this.$axios.$post('/api/auth/signup', payload)
+    await this.$axios.$post('/api/users/register', payload)
       .then((response) => {
         dispatch("_fetchusers", null, { root: true });
       }).catch((err) => {
