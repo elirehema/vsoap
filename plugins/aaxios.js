@@ -1,4 +1,4 @@
-export default function ({ $axios, redirect }) {
+export default function ({ $axios,  store,redirect }) {
     $axios.onRequest(config => {
       console.log('Making request to ' + config.url)
       const token = localStorage.getItem('accessToken')
@@ -24,6 +24,9 @@ export default function ({ $axios, redirect }) {
       const code = parseInt(error.response && error.response.status)
       if (code === 400) {
         redirect('/400')
+      }
+      if (code === 401) {
+        store.dispatch('_logoutsession')
       }
     })
   }

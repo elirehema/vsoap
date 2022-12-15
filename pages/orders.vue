@@ -14,12 +14,13 @@
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              color="success"
               dark
               class="mb-2 px-4"
               v-bind="attrs"
               v-on="on"
             >
+              <v-icon left> mdi-plus </v-icon>
               Place new order
             </v-btn>
           </template>
@@ -31,14 +32,14 @@
 
               <v-spacer></v-spacer>
               <v-btn color="white" @click="addProduct" icon>
-              <v-icon>mdi-plus</v-icon>
+                <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-toolbar>
 
             <v-card-text>
               <v-container>
                 <v-row v-for="order in ords" :key="order.productId">
-                  <v-col  cols="12" sm="12" md="6">
+                  <v-col cols="12" sm="12" md="6">
                     <v-select
                       v-model="order.editedItem.productId"
                       :items="products"
@@ -93,6 +94,19 @@
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
+    <template v-slot:item.status="{ item }">
+      <v-chip
+      small
+      color="success"
+      label
+      text-color="white"
+    >
+      <v-icon left>
+        mdi-label
+      </v-icon>
+      {{ item.status.toUpperCase()}}
+    </v-chip>
+    </template>
     <template v-slot:no-data>
       <v-btn color="primary"> Reset </v-btn>
     </template>
@@ -120,7 +134,7 @@ export default {
       editedIndex: -1,
       editedItem: {
         amount: 0,
-        productId: 0
+        productId: 0,
       },
       defaultItem: {},
     };
@@ -171,15 +185,15 @@ export default {
         this.editedIndex = -1;
       });
     },
-    addProduct(){
-      this.ords.push(this.editedItem)
+    addProduct() {
+      this.ords.push(this.editedItem);
     },
 
     save() {
       if (this.editedIndex > -1) {
         this.$store.dispatch("_updateproduct", this.editedItem);
       } else {
-        console.log(this.ords)
+        console.log(this.ords);
         //this.$store.dispatch("_addnewproduct", this.editedItem);
       }
       this.close();

@@ -98,7 +98,7 @@
       <v-badge
         :content="adv"
         :value="adv"
-        color="indigo"
+        color="success"
         overlap
       >
         <v-icon dark>
@@ -108,7 +108,7 @@
       <v-badge
         :content="notifications"
         :value="notifications"
-        color="indigo"
+        color="success"
         class="ml-6"
         overlap
       >
@@ -119,7 +119,7 @@
       <v-badge
         :content="messages"
         :value="messages"
-        color="indigo"
+        color="success"
         class="ml-6"
         overlap
       >
@@ -182,7 +182,7 @@ export default {
             {
               title: 'Users',
               icon: 'account-cog',
-              to: 'users'
+              to: '/users'
             },
             {
               title: 'Settings',
@@ -264,17 +264,22 @@ export default {
             {
               title: 'Products',
               icon: 'package-variant',
-              to: 'products'
+              to: '/products'
             },
             {
               title: 'Orders',
               icon: 'cart-check',
-              to: 'orders'
+              to: '/orders'
             },
             {
               title: 'Invoices',
               icon: 'receipt-text-check',
-              to: 'invoices'
+              to: '/invoices'
+            },
+            {
+              title: 'Payments',
+              icon: 'contactless-payment-circle',
+              to: '/payments'
             }
           ]
         },

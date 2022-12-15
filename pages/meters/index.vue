@@ -14,12 +14,13 @@
         <v-dialog v-model="dialog" max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              color="success"
               dark
               class="mb-2 font-weight-bold"
               v-bind="attrs"
               v-on="on"
             >
+              <v-icon left> mdi-plus </v-icon>
               Add Meter
             </v-btn>
           </template>
@@ -59,48 +60,36 @@
                       label="Other Descriptions"
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                      cols="12"
-                      sm="12"
-                      md="6"
-                    >
+                  <v-col cols="12" sm="12" md="6">
                     <v-select
-                            v-model="editedItem.meterTypeId"
-                            :items="types"
-                            :item-text="'type'"
-                            :item-value="'id'"
-                            label="Select Meter Type"
-                            v-on:focus="$store.dispatch('_fetchmetertypes')"
-                            :rules="[rules.required]"
-                            name="editedItem.meterTypeId"
-                           
-                            persistent-hint
-                            single-line
-                          >
-                          </v-select>
-                    
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="12"
-                      md="6"
+                      v-model="editedItem.meterTypeId"
+                      :items="types"
+                      :item-text="'type'"
+                      :item-value="'id'"
+                      label="Select Meter Type"
+                      v-on:focus="$store.dispatch('_fetchmetertypes')"
+                      :rules="[rules.required]"
+                      name="editedItem.meterTypeId"
+                      persistent-hint
+                      single-line
                     >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
                     <v-select
-                            v-model="editedItem.siteId"
-                            :items="sites"
-                            :item-text="'name'"
-                            :item-value="'id'"
-                            label="Select Site"
-                            v-on:focus="$store.dispatch('_fetchsites')"
-                            :rules="[rules.required]"
-                            name="editedItem.siteId"
-                           
-                            persistent-hint
-                            single-line
-                          >
-                          </v-select>
-                    
-                    </v-col>
+                      v-model="editedItem.siteId"
+                      :items="sites"
+                      :item-text="'name'"
+                      :item-value="'id'"
+                      label="Select Site"
+                      v-on:focus="$store.dispatch('_fetchsites')"
+                      :rules="[rules.required]"
+                      name="editedItem.siteId"
+                      persistent-hint
+                      single-line
+                    >
+                    </v-select>
+                  </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
@@ -158,6 +147,7 @@ export default {
 
         { text: "Serial No.", value: "serialNumber" },
         { text: "Meter Number", value: "meterNumber" },
+         { text: "Credit Balance", value: "creditBalance" },
         { text: "Description", value: "description" },
         { text: "Site ID", value: "SiteId" },
         { text: "MeterType ID", value: "MeterTypeID" },
@@ -172,8 +162,8 @@ export default {
   computed: {
     ...mapGetters({
       meters: "meters",
-      sites: 'sites',
-      types: 'metertypes'
+      sites: "sites",
+      types: "metertypes",
     }),
     formTitle() {
       return this.editedIndex === -1 ? "Add new site" : "Edit site";

@@ -14,12 +14,13 @@
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              color="success"
               dark
               class="mb-2 px-4"
               v-bind="attrs"
               v-on="on"
             >
+              <v-icon left> mdi-plus </v-icon>
               Add Product
             </v-btn>
           </template>
