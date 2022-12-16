@@ -22,7 +22,7 @@
         <v-list-item v-if="!miniVariant" link>
           <v-list-item-content>
             <v-list-item-title class="text-h6">
-              Nexis IOS
+              Payless
             </v-list-item-title>
             <v-list-item-subtitle>Smart metering system</v-list-item-subtitle>
           </v-list-item-content>
@@ -90,7 +90,7 @@
       </v-btn>
       <v-btn
         icon
-        dark
+        dark to="/"
       >
         <v-icon>mdi-home</v-icon>
       </v-btn>
@@ -302,8 +302,8 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js',
-      url: 'https://www.taxconsulting.co.za/wp-content/uploads/2021/10/Lexis-Nexis.png',
-      miniUrl: 'https://member.psssf.go.tz/images/logo-bird.png'
+      url: 'https://paylessus.vtexassets.com/assets/vtex.file-manager-graphql/images/fa2a51b6-6e47-4a99-980b-8fd40ee103d5___c89f36cf25c1bd997d22914e012b632b.png',
+      miniUrl: 'https://d1fdloi71mui9q.cloudfront.net/nVPpGu46TiOGqmu6JXLl_73f929c7b99eb58119fad641fd0c83792'
     }
   }
 }

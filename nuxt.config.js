@@ -25,8 +25,8 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: 'NexisIot',
-    title: 'NexisIOT',
+    titleTemplate: 'Payless',
+    title: 'Payless',
     meta: [
       ...meta,
       { charset: 'utf-8' },
