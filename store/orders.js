@@ -39,11 +39,18 @@ const state = () => ({
           dispatch("_fetchorders", null, { root: true });
         }).catch((err) => {
         })
-    }
+    },
+    async _makeorderpayment({ dispatch }, payload) {
+      await this.$axios.$post('/api/orders/approve', payload)
+        .then((response) => {
+          dispatch("_fetchorders", null, { root: true });
+        }).catch((err) => {
+        })
+    },
   }
   
   const getters = {
-    orders: (state) => { return state.orders }
+    orderslist: (state) => { return state.orders }
   
   }
   

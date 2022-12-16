@@ -1,11 +1,12 @@
 <template>
   <v-row justify="start">
-    <v-col cols="12" sm="12" md="3">
-      <v-card min-height="400" flat outlined class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-      </v-card>
-    </v-col>
-    <v-col cols="12" sm="12" md="6">
+    <v-col cols="12" sm="12" md="4">
+    <div v-if="sum">
+      <summary-card :item="sum"></summary-card>
+    </div>
+    <skeleton-summary-card v-else></skeleton-summary-card>
+  </v-col>
+    <v-col cols="12" sm="12" md="4">
       <v-card min-height="400" flat outlined>
         <v-sparkline
           :value="value"
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import SummaryCard from '~/components/summary_card.vue'
+import { mapGetters } from 'vuex'
 const gradients = [
   ['#222'],
   ['#42b3f4'],
@@ -40,6 +43,9 @@ const gradients = [
   ['#f72047', '#ffd200', '#1feaea']
 ]
 export default {
+  components:{
+    'summary-card': SummaryCard
+  },
   name: 'IndexPage',
   data () {
     return {
@@ -55,6 +61,14 @@ export default {
       type: 'trend',
       autoLineWidth: false
     }
+  },
+  computed:{
+    ...mapGetters({
+      sum : 'statistics'
+    })
+  },
+  created(){
+    this.$store.dispatch('_fetchstatistics')
   }
 }
 </script>
