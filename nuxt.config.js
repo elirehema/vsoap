@@ -1,4 +1,4 @@
-const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/vsoap/' : '/';
+const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/' : '/';
 import metajs from './plugins/meta';
 const meta = metajs();
 export default {
