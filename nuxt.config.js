@@ -36,10 +36,10 @@ export default {
       { name: "apple-mobile-web-app-status-bar-style", content: "#A0D18C" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-      { hid: 'description', name: 'description', content: 'Amala Yangu self-service Web Application' },
+      { hid: 'description', name: 'description', content: 'Payless Yangu self-service Web Application' },
 
       //Twitter meta-data
-      { hid: "twitter:site", name: "twitter:site", content: "AmalaApp" },
+      { hid: "twitter:site", name: "twitter:site", content: "PaylessApp" },
       { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
       { hid: "twitter:image:alt", name: "twitter:image:alt", content: "Ospic application" },
 
@@ -121,8 +121,8 @@ export default {
   },
   pwa: {
     manifest: {
-      name: 'Amala Yangu Web Application',
-      short_name: 'Amala Yangu',
+      name: 'Payless smart metering redefined',
+      short_name: 'Payless',
       color_theme: "#A0D18C",
       background_color: "#A0D18C",
       lang: 'en',
@@ -130,19 +130,19 @@ export default {
     },
     meta: {
       /* meta options */
-      name: "Amala Yangu",
-      author: "Amala",
-      description: "Amala Yangu self-service Web Application",
+      name: "Payless",
+      author: "Payless",
+      description: "Payless",
       lang: "en",
       ogType: "website",
-      ogSiteName: "Amala Yangu",
-      ogTitle: "Amala Yangu Web Application",
-      ogDescription: "Amala Yangu self-service Web Application",
-      ogHost: "https://amala.co.tz",
-      ogImage: "https://amalatechnologies.github.io/ssap/preview.png",
+      ogSiteName: "Payless",
+      ogTitle: "Payless",
+      ogDescription: "Payless smart metering redefined",
+      ogHost: "https://payless.cloud",
+      ogImage: "https://www.mdpi.com/smartcities/smartcities-03-00052/article_deploy/html/images/smartcities-03-00052-ag.png",
       ogUrl: "",
-      twitterCard: "Amala Yangu",
-      twitterSite: "amalaApp",
+      twitterCard: "Payless",
+      twitterSite: "Payless",
       mobileAppIOS: "yes",
       appleStatusBarStyle: "black-translucent",
       theme_color: "#A0D18C"
@@ -161,7 +161,7 @@ export default {
   },
   proxy:{
     
-    '/api/': {target: "http://localhost:8080/api/v1", pathRewrite: {'^/api/': ''} }
+    '/api/': {target: "https://ams.nexiss.cloud/api/v1", pathRewrite: {'^/api/': ''} }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
