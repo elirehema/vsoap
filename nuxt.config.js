@@ -1,4 +1,4 @@
-const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/' : '/';
+const routerBase = process.env.DEPLOY_ENV === 'github' ? '/vsoap/' : '/';
 import metajs from './plugins/meta';
 const meta = metajs();
 export default {
@@ -100,7 +100,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    publicPath: process.env.NODE_ENV === 'production' ? '/assets/' : '',
+    publicPath: process.env.NODE_ENV === 'github' ? '/assets/' : '',
     extend(config, ctx) { },
     postcss: {
       plugins: {
