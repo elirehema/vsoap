@@ -1,4 +1,4 @@
-const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/ssap/' : '/';
+const routerBase = process.env.DEPLOY_ENV === 'prod' ? '/vsoap/' : '/';
 import metajs from './plugins/meta';
 const meta = metajs();
 export default {
@@ -19,8 +19,8 @@ export default {
   },
 
   env: {
-    baseUrl: 'http://localhost:8082/api/v1',
-    localUrl: 'http://localhost:8082/api/v1'
+    baseUrl: 'https://ams.nexiss.cloud/api/v1',
+    localUrl: 'https://ams.nexiss.cloud/api/v1'
   },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
