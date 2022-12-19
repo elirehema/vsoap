@@ -24,14 +24,14 @@ const mutations = {
     
       this.$router.push("/");
     }else{
-      window.location.reload(true)
+     // window.location.reload(true)
     }
   },
   ["LOGOUT_SESSION"](state) {
     window.localStorage.clear();
     sessionStorage.clear();
     this.$router.push("/signin");
-    window.location.reload(true)
+    //window.location.reload(true)
   },
 };
 const actions = {
