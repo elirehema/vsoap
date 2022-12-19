@@ -84,7 +84,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/pwa',
     '@nuxtjs/toast',
     'nuxt-material-design-icons',
     ['cookie-universal-nuxt', { parseJSON: false }],
@@ -118,40 +117,6 @@ export default {
           drop_console: true
         }
       }
-    }
-  },
-  pwa: {
-    manifest: {
-      name: 'Payless smart metering redefined',
-      short_name: 'Payless',
-      color_theme: "#A0D18C",
-      background_color: "#A0D18C",
-      lang: 'en',
-      useWebmanifestExtension: false
-    },
-    meta: {
-      /* meta options */
-      name: "Payless",
-      author: "Payless",
-      description: "Payless",
-      lang: "en",
-      ogType: "website",
-      ogSiteName: "Payless",
-      ogTitle: "Payless",
-      ogDescription: "Payless smart metering redefined",
-      ogHost: "https://payless.cloud",
-      ogImage: "https://www.mdpi.com/smartcities/smartcities-03-00052/article_deploy/html/images/smartcities-03-00052-ag.png",
-      ogUrl: "",
-      twitterCard: "Payless",
-      twitterSite: "Payless",
-      mobileAppIOS: "yes",
-      appleStatusBarStyle: "black-translucent",
-      theme_color: "#A0D18C"
-
-
-    },
-    icon: {
-      iconSrc: '/static/maskable.png'
     }
   },
 
