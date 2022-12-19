@@ -20,7 +20,7 @@ const mutations = {
     if (payload.accessToken != undefined) {
       state.accessToken = payload.accessToken;
       localStorage.setItem("accessToken", payload.accessToken);
-      document.cookie = `current_subject=user::${payload.username}; SameSite=None; Secure`;
+      //document.cookie = `current_subject=user::${payload.username}; SameSite=None; Secure`;
     
       this.$router.push("/");
     }else{

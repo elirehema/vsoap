@@ -83,6 +83,7 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/toast',
     'nuxt-material-design-icons',
@@ -156,12 +157,17 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    proxy: true
-   // baseUrl: 'http://localhost:8083/api/v1'
+    proxy: true,
+    credentials: true,
   },
   proxy:{
     
-    '/api/': {target: "https://ams.nexiss.cloud/api/v1", pathRewrite: {'^/api/': ''} }
+    '/api/': {
+      target: "https://ams.nexiss.cloud/api/v1",
+      pathRewrite: {
+        '^/api/': ''
+      }
+     }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
