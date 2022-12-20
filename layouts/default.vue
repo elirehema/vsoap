@@ -302,8 +302,8 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js',
-      url: 'https://paylessus.vtexassets.com/assets/vtex.file-manager-graphql/images/fa2a51b6-6e47-4a99-980b-8fd40ee103d5___c89f36cf25c1bd997d22914e012b632b.png',
-      miniUrl: 'https://d1fdloi71mui9q.cloudfront.net/nVPpGu46TiOGqmu6JXLl_73f929c7b99eb58119fad641fd0c83792'
+      url: 'https://billing.payless.cloud/asset/img/logo.png',
+      miniUrl: 'https://billing.payless.cloud/asset/img/logo.png'
     }
   }
 }
