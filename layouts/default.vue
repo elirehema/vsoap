@@ -30,6 +30,23 @@
       </v-list>
 
       <v-divider />
+      <v-list-item
+      dense
+            v-for="menu in mainmenu"
+            :key="menu.title"
+            :to="menu.to"
+            color="white"
+            class="pl-4"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ 'mdi-'+ menu.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                <span class="font-weight-bold">{{ menu.title }}</span>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
       <v-list dense>
         <v-list-group
           v-for="item in menuitems"
@@ -53,7 +70,7 @@
             :key="child.title"
             :to="child.to"
             color="white"
-            class="pl-4"
+            class="pl-9"
           >
             <v-list-item-icon>
               <v-icon>{{ 'mdi-'+ child.icon }}</v-icon>
@@ -174,33 +191,32 @@ export default {
       messages: 8,
       adv: 7,
       notifications: 1,
-      menuitems: [
+      mainmenu:[
         {
-          title: 'System',
-          icon: 'cog-transfer-outline',
-          menus: [
-            {
-              title: 'Users',
-              icon: 'account-cog',
-              to: '/users'
+              title: 'Dashboard',
+              icon: 'view-dashboard',
+              to: '/'
+            },
+        {
+              title: 'Bulk Purchases',
+              icon: 'cart-check',
+              to: '/purchases/bulk'
             },
             {
-              title: 'Settings',
-              icon: 'cog'
+              title: 'Token Purchases',
+              icon: 'cart-check',
+              to: '/purchases/token'
             }
-          ]
-        },
+      ],
+      menuitems: [
+   
         {
-          title: 'Properties',
+          title: 'Devices',
           icon: 'bookshelf',
           menus: [
+           
             {
-              title: 'Sites',
-              icon: 'sitemap-outline',
-              to:'/sites'
-            },
-            {
-              title: 'Meter',
+              title: 'Meters',
               icon: 'gauge',
               to:'/meters'
             },
@@ -210,93 +226,99 @@ export default {
               to:'/meters/types'
             },
             {
+              title: 'DCUs',
+              icon: 'gauge'
+            },
+         
+   
+          ]
+        },
+            {
+          title: 'Sites',
+          icon: 'domain',
+          menus: [
+            {
+              title: 'Sites',
+              icon: 'office-building-marker',
+              to:'/sites'
+            },
+          ]
+        },
+        {
+          title: 'Clients Managements',
+          icon: 'cog-transfer-outline',
+          menus: [
+            {
               title: 'Customer',
               icon: 'account-group',
               to: '/customers'
             },
-           /**  {
-              title: 'POC',
-              icon: 'map-marker-path'
-            },
-            {
-              title: 'DCU',
-              icon: 'access-point'
-            },
-            {
-              title: 'QES',
-              icon: 'dots-circle'
-            },
-            {
-              title: 'Line Loss Rule',
-              icon: 'source-branch'
-            },
-            {
-              title: 'VEE Work Group',
-              icon: 'widgets'
-            },
-            {
-              title: 'Install Survey',
-              icon: 'magnify'
-            },
-            {
-              title: 'Install Plan',
-              icon: 'crosshairs'
-            },
-            {
-              title: 'Install Order',
-              icon: 'stack-overflow'
-            },
-            {
-              title: 'Help Desk',
-              icon: 'information'
-            }**/
+          
           ]
         },
         {
-          title: 'Prepaid',
-          icon: 'domain',
-          menus: []
-        },
-        {
-          title: 'Service Request',
-          icon: 'cloud-download',
+          title: 'Users Managements',
+          icon: 'cog-transfer-outline',
           menus: [
             {
-              title: 'Products',
-              icon: 'package-variant',
-              to: '/products'
+              title: 'Users',
+              icon: 'account-cog',
+              to: '/users'
+            },
+          
+          ]
+        },
+    
+        {
+          title: 'Vending',
+          icon: 'file-key',
+          menus: [
+            {
+              title: 'Clear tamper',
+              icon: 'close-circle-outline'
             },
             {
-              title: 'Orders',
-              icon: 'cart-check',
-              to: '/orders'
+              title: 'Clear Credit token',
+              icon: 'close-circle'
+            },
+            {
+              title: 'Recharge token',
+              icon: 'close-octagon'
+            },
+            {
+              title: 'SGC List',
+              icon: 'qrcode'
+            },
+          ]
+        },
+        {
+          title: 'Transactions',
+          icon: 'chart-line',
+          menus:[
+            {
+              title: 'Payments',
+              icon: 'contactless-payment-circle',
+              to: '/payments'
             },
             {
               title: 'Invoices',
               icon: 'receipt-text-check',
               to: '/invoices'
             },
+          ]
+        },
+      
+        {
+          title: 'System',
+          icon: 'cog-transfer-outline',
+          menus: [
+         
             {
-              title: 'Payments',
-              icon: 'contactless-payment-circle',
-              to: '/payments'
+              title: 'Settings',
+              icon: 'cog'
             }
           ]
         },
-        {
-          title: 'Analytics',
-          icon: 'chart-line'
-        },
-        {
-          title: 'Report',
-          icon: 'file-key',
-          menus: []
-        },
-        {
-          title: 'Workflow',
-          icon: 'arrow-decision',
-          menus: []
-        }
       ],
       miniVariant: false,
       right: true,

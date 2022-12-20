@@ -21,7 +21,7 @@
               v-on="on"
             >
               <v-icon left> mdi-plus </v-icon>
-              Add Meter
+              Add new meter
             </v-btn>
           </template>
           <v-card>
