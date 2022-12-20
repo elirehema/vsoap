@@ -78,7 +78,19 @@
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary"> Reset </v-btn>
+      <v-btn elevation="0"  
+      :loading="loading"
+      :disabled="loading"
+       @click="(loader = 'loading'),($store.dispatch('_fetchmetertypes'))"
+       small rounded class="white--text text-capitalize" color="blue-grey">
+        <v-icon
+        left
+        dark
+      >
+        mdi-cloud-download
+      </v-icon>
+      Reload  
+      </v-btn>
     </template>
   </v-data-table>
   <skeleton-table-loader v-else />
