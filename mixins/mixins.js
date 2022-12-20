@@ -8,9 +8,21 @@ const mixins = {
   data () {
     return {
       rules: {
-        required: value => !!value || "Field Required"
-      }
+        required: value => !!value || "Field Required",
+      },
+      loading: false,
+      loader: null
     }
+  },
+  watch: {
+    loader () {
+      const l = this.loader
+      this[l] = !this[l]
+
+      setTimeout(() => (this[l] = false), 3000)
+
+      this.loader = null
+    },
   },
   methods: {},
   computed: {
