@@ -18,10 +18,6 @@ export default {
     background: '#FAFAFA'
   },
 
-  env: {
-    baseUrl: 'https://ams.nexiss.cloud/api/v1',
-    localUrl: 'https://ams.nexiss.cloud/api/v1'
-  },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -128,7 +124,8 @@ export default {
   proxy:{
     
     '/api/': {
-      target: "https://ams.nexiss.cloud/api/v1",
+     // target: "https://ams.nexiss.cloud/api/v1",
+     target: "http://localhost:8080/api/v1",
       pathRewrite: {
         '^/api/': ''
       }

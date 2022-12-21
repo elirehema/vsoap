@@ -1,5 +1,6 @@
 <template>
   <v-data-table
+  v-if="customers"
     :headers="headers"
     :items="customers"
     sort-by="calories"
@@ -124,6 +125,7 @@
       </v-btn>
     </template>
   </v-data-table>
+  <skeleton-table-loader v-else />
 </template>
 <script>
 import { mapGetters } from "vuex";

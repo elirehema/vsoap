@@ -50,7 +50,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="50%">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="success" dark class="mb-2 px-4" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
@@ -70,14 +70,26 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="12" md="6">
+                  <v-col cols="12" sm="12" md="4">
                     <v-select v-model="editedItem.productId" :items="products" :item-text="'name'" :item-value="'id'"
                       label="Select Product" v-on:focus="$store.dispatch('_fetchproducts')" :rules="[rules.required]"
-                      name="editedItem.productId" persistent-hint single-line>
+                      name="editedItem.productId" persistent-hint readonly single-line>
                     </v-select>
                   </v-col>
+                  <v-col cols="12" sm="12" md="4">
+                    <v-select v-model="editedItem.serialNumber" :items="meters" :item-text="'meterNumber'" :item-value="'serialNumber'"
+                      label="Select Meter" v-on:focus="$store.dispatch('_fetchmeters')" :rules="[rules.required]"
+                      name="editedItem.productId"  persistent-hint single-line>
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="4">
+                    <v-text-field v-model="editedItem.msisdn" label="Phone Number"></v-text-field>
+                  </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-text-field v-model="editedItem.amount" label="Product Code"></v-text-field>
+                    <v-text-field v-model="editedItem.amount" label="Amount "></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field v-model="editedItem.transactionRef" label="Transaction Reference"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -144,25 +156,30 @@ export default {
       ],
       ords: [],
       editedIndex: -1,
-      editedItem: {},
+      editedItem: {
+        productId: 2
+      },
       paymentreq: {
         action: 400,
         orderId: null
       },
-      defaultItem: {},
+      defaultItem: {
+        productId: 2
+      },
     };
   },
   computed: {
     ...mapGetters({
-      orders: "orderslist",
+      orders: "tokenpurchases",
       products: "products",
+      meters :"meters"
     }),
     formTitle() {
       return this.editedIndex === -1 ? "Place new order" : "Edit customer";
     },
   },
   created() {
-    this.$store.dispatch("_fetchorders");
+    this.$store.dispatch("_fetchtokenpurchases");
   },
   methods: {
     editItem(item) {
@@ -215,10 +232,10 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        this.$store.dispatch("_updateproduct", this.editedItem);
+       // this.$store.dispatch("_updateproduct", this.editedItem);
       } else {
-        console.log(this.ords);
-        //this.$store.dispatch("_addnewproduct", this.editedItem);
+       // var payload =[this.editedItem]
+        this.$store.dispatch("_placenewtokenorder", this.editedItem);
       }
       this.close();
     },

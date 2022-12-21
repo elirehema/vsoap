@@ -73,11 +73,11 @@
                   <v-col cols="12" sm="12" md="6">
                     <v-select v-model="editedItem.productId" :items="products" :item-text="'name'" :item-value="'id'"
                       label="Select Product" v-on:focus="$store.dispatch('_fetchproducts')" :rules="[rules.required]"
-                      name="editedItem.productId" persistent-hint single-line>
+                      name="editedItem.productId" persistent-hint readonly single-line>
                     </v-select>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-text-field v-model="editedItem.amount" label="Product Code"></v-text-field>
+                    <v-text-field v-model="editedItem.amount" label="Purchase Amount"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -144,17 +144,21 @@ export default {
       ],
       ords: [],
       editedIndex: -1,
-      editedItem: {},
+      editedItem: {
+        productId: 1
+      },
       paymentreq: {
         action: 400,
         orderId: null
       },
-      defaultItem: {},
+      defaultItem: {
+        productId: 1
+      },
     };
   },
   computed: {
     ...mapGetters({
-      orders: "orderslist",
+      orders: "bulkpurchases",
       products: "products",
     }),
     formTitle() {
@@ -162,7 +166,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("_fetchorders");
+    this.$store.dispatch("_fetchbulkpurchases");
   },
   methods: {
     editItem(item) {
@@ -217,8 +221,10 @@ export default {
       if (this.editedIndex > -1) {
         this.$store.dispatch("_updateproduct", this.editedItem);
       } else {
-        console.log(this.ords);
-        //this.$store.dispatch("_addnewproduct", this.editedItem);
+        var payload =[this.editedItem]
+        console.log(payload);
+        
+      this.$store.dispatch("_placenewbulkorder", payload);
       }
       this.close();
     },
