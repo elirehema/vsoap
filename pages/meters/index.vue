@@ -161,13 +161,16 @@ export default {
         { text: "Meter Number", value: "meterNumber" },
          { text: "Credit Balance", value: "creditBalance" },
         { text: "Description", value: "description" },
-        { text: "Site ID", value: "SiteId" },
-        { text: "MeterType ID", value: "MeterTypeID" },
+        { text: "Site ID", value: "siteId" },
+        { text: "MeterType ID", value: "meterTypeId" },
         { text: "Actions", value: "actions", sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
-      editedItem: {},
+      editedItem: {
+        siteId:0,
+        meterTypeId: 0
+      },
       defaultItem: {},
     };
   },
@@ -220,7 +223,7 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        this.$store.dispatch("_updatesiteinformation", this.editedItem);
+        this.$store.dispatch("_updatemeterinformation", this.editedItem);
       } else {
         this.$store.dispatch("_addnewmeter", this.editedItem);
       }
