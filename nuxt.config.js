@@ -56,6 +56,7 @@ export default {
     '~/plugins/aaxios',
     '~/plugins/filters.js',
     '~/plugins/pwa.client.js',
+    '~/plugins/vue-apexcharts.js',
     '~/mixins/mixins.js',
     '~/plugins/vuepersistence.js'
 
@@ -125,7 +126,7 @@ export default {
     
     '/api/': {
      // target: "https://ams.nexiss.cloud/api/v1",
-     target: "http://localhost:8080/api/v1",
+     target: process.env.DEPLOY_ENV === 'dev' ? "http://localhost:8080/api/v1":"https://ams.nexiss.cloud/api/v1",
       pathRewrite: {
         '^/api/': ''
       }
