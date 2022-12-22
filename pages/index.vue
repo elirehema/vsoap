@@ -1,31 +1,26 @@
 <template>
   <v-row justify="start">
     <v-col cols="12" sm="12" md="4">
-    <div v-if="sum">
-      <summary-card :item="sum"></summary-card>
-    </div>
-    <skeleton-summary-card v-else></skeleton-summary-card>
-  </v-col>
+      <div v-if="sum">
+        <summary-card :item="sum"></summary-card>
+      </div>
+      <skeleton-summary-card v-else></skeleton-summary-card>
+    </v-col>
     <v-col cols="12" sm="12" md="4">
       <v-card min-height="400" flat outlined>
-        <v-sparkline
-          :value="value"
-          :gradient="gradient"
-          :smooth="radius || false"
-          :padding="padding"
-          :line-width="width"
-          :stroke-linecap="lineCap"
-          :gradient-direction="gradientDirection"
-          :fill="fill"
-          :type="type"
-          :auto-line-width="autoLineWidth"
-          auto-draw
-        />
+        <v-sparkline :value="value" :gradient="gradient" :smooth="radius || false" :padding="padding"
+          :line-width="width" :stroke-linecap="lineCap" :gradient-direction="gradientDirection" :fill="fill"
+          :type="type" :auto-line-width="autoLineWidth" auto-draw />
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="3">
-      <v-card min-height="400" flat outlined class="logo py-4 d-flex justify-center align-center">
+    <v-col cols="12" sm="12" md="4">
+      <v-card flat outlined class="pa-2">
         <chart-bar />
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="12" md="4">
+      <v-card rounded  class="pa-2">
+        <chart-area-spline :data="splinedata" />
       </v-card>
     </v-col>
   </v-row>
@@ -43,11 +38,11 @@ const gradients = [
   ['#f72047', '#ffd200', '#1feaea']
 ]
 export default {
-  components:{
+  components: {
     'summary-card': SummaryCard
   },
   name: 'IndexPage',
-  data () {
+  data() {
     return {
       width: 2,
       radius: 10,
@@ -59,15 +54,25 @@ export default {
       gradients,
       fill: false,
       type: 'trend',
-      autoLineWidth: false
+      autoLineWidth: false,
+      splinedata: {
+        series: [{
+          name: 'series1',
+          data: [31, 40, 28, 51, 42, 109, 100]
+        }, {
+          name: 'series2',
+          data: [11, 32, 45, 32, 34, 52, 41]
+        }],
+        categories: ["Jan", "Feb", "March", "April", "May", "Jun", "Jul"]
+      }
     }
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      sum : 'statistics'
+      sum: 'statistics'
     })
   },
-  created(){
+  created() {
     this.$store.dispatch('_fetchstatistics')
   }
 }

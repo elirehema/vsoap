@@ -35,12 +35,12 @@ export default {
           },
         },
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         stroke: {
           show: true,
           curve: "smooth",
-          width: 1,
+          width: 2,
         },
         xaxis: {
           type: "date",

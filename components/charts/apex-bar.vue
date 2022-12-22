@@ -15,7 +15,10 @@ export default {
       series: [
         {
           name: "Inflation",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+          data: [
+            2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2, 0.3,
+            0.5, 0.8, 1.4, 2.3, 3.0, 2.5, 2.0, 1.4, 0.8,
+          ],
         },
       ],
       chartOptions: {
@@ -36,9 +39,9 @@ export default {
           formatter: function (val) {
             return val + "%";
           },
-          offsetY: -20,
+          offsetY: -25,
           style: {
-            fontSize: "12px",
+            fontSize: "10px",
             colors: ["#304758"],
           },
         },
@@ -57,6 +60,15 @@ export default {
             "Oct",
             "Nov",
             "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
           ],
           position: "top",
           axisBorder: {
@@ -81,6 +93,7 @@ export default {
             enabled: true,
           },
         },
+
         yaxis: {
           axisBorder: {
             show: false,
@@ -96,7 +109,7 @@ export default {
           },
         },
         title: {
-          text: "Monthly Inflation in Argentina, 2002",
+          text: "Total token purchases in last two years, 2002",
           floating: true,
           offsetY: 330,
           align: "center",
