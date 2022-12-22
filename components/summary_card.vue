@@ -1,16 +1,16 @@
 <template>
-    <v-col class="pa-1" xs="12" sm="12" md="12" xl="12">
+    <v-col>
       <v-hover>
         <template v-slot:default="{ hover }">
           <v-card class="mx-auto" flat elevation="1" v-on="hover">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title
-                  class="font-weight-black text-h2"
+                  class="font-weight-black text-h5"
                   
                 >{{item.amount}}</v-list-item-title>
                 <v-list-item-subtitle
-                  class="font-weight-normal black--text my-1 text-h3"
+                  class="font-weight-bold black--text my-1"
                  
                 >Credit Balance</v-list-item-subtitle>
               </v-list-item-content>
