@@ -25,7 +25,7 @@
     </v-col>
     <v-col cols="12" sm="12" md="3">
       <v-card min-height="400" flat outlined class="logo py-4 d-flex justify-center align-center">
-        <VuetifyLogo />
+        <chart-bar />
       </v-card>
     </v-col>
   </v-row>

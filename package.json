@@ -25,6 +25,7 @@
     "@nuxtjs/axios": "^5.13.5",
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/toast": "^3.3.1",
+    "apexcharts": "^3.36.3",
     "bulma": "^0.9.4",
     "cookie-universal-nuxt": "^2.2.1",
     "core-js": "^3.23.5",
@@ -33,6 +34,7 @@
     "nuxt-material-design-icons": "^1.0.4",
     "secure-ls": "^1.2.6",
     "sweetalert": "^2.1.2",
+    "vue-apexcharts": "^1.6.2",
     "vue-i18n": "^8.26.5",
     "vuetify": "^2.6.7",
     "vuex-persistedstate": "^3.2.0"

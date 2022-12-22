@@ -3,7 +3,16 @@ const mixins = {
   components: {
     'skeleton-table-loader': () => import('~/components/loaders/skeleton-table-loader.vue'),
     'skeleton-datepicker-loader': () => import('~/components/loaders/skeleton-date-picker.vue'),
-    'skeleton-summary-card': () => import('~/components/loaders/skeleton-summary-card.vue')
+    'skeleton-summary-card': () => import('~/components/loaders/skeleton-summary-card.vue'),
+    'chart-bar': () => import('@/components/charts/apex-bar.vue'),
+    'chart-area-spline': () => import('@/components/charts/apex-area-spline.vue'),
+    'chart-bar': () => import('@/components/charts/apex-bar.vue'),
+    'chart-basic-bar': () => import('@/components/charts/apex-basic-bar.vue'),
+    'chart-donut': () => import('@/components/charts/apex-donut.vue'),
+    'chart-line-gradient': () => import('@/components/charts/apex-line-gradient.vue'),
+    'chart-line': () => import('@/components/charts/apex-line.vue'),
+    'chart-pie': () => import('@/components/charts/apex-pie.vue'),
+    'chart-smooth-line': () => import('@/components/charts/apex-smooth-line.vue')
   },
   data () {
     return {
