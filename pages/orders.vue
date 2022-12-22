@@ -132,7 +132,7 @@ export default {
       dialogDelete: false,
       editdialog: false,
       headers: [
-        { text: "Order No.#", value: "orderNumber" },
+        { text: "Order No.#", value: "orderNumber", class:"overflow-x-hidden"},
         { text: "Total Amount", value: "amount" },
         { text: "Control Number", value: "controlNumber" },
         { text: "Status", value: "status" },
@@ -222,25 +222,7 @@ export default {
       }
       this.close();
     },
-    getStatusColor(v){
-      switch (v) {
-        case '100':
-          return 'white'
-          break;
-      case '200':
-        return 'success lighten-3'
-        case '300':
-        return 'blue lighten-3'
-
-        case '400':
-          return 'teal'
-          case '500':
-          return 'red lighten-4'
-        default:
-          return 'white'
-          break;
-      }
-    }
+ 
   },
 };
 </script>
