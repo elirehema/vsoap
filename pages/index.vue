@@ -3,16 +3,22 @@
     <v-row>
       <summarycard v-for="(summary, i) in summaries" :key="i" :data="summary" />
     </v-row>
-    <v-row class="pa-0 ma-0">
+    <v-row class="mt-4" >
       
-      <v-col cols="12" sm="12" md="8">
+      <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
         <v-card class="pa-0 ma-0" rounded>
           <chart-area-spline height="450" :data="splinedata" />
         </v-card>
       </v-col>
-      <v-col cols="12" sm="12" md="2">
+      <v-col cols="12" sm="12" md="2" class="pa-0 mt-1">
         
-        <summary-card v-if="sum" :item="sum"></summary-card>
+        <summary-card v-for="i in 4" class="pa-0 my-1" v-if="sum" :item="sum"/>
+     
+      <skeleton-summary-card v-else></skeleton-summary-card>
+    </v-col>
+    <v-col cols="12" sm="12" md="2" class="py-0 mt-1">
+        
+        <summary-card v-for="i in 4" class="pa-0 my-1" v-if="sum" :item="sum"/>
      
       <skeleton-summary-card v-else></skeleton-summary-card>
     </v-col>
@@ -108,7 +114,7 @@ export default {
         {
           title: "Patners",
           measure: null,
-          value: "0",
+          value: "1",
           color: "lime darken-1",
           subtitle: "Number of registered partners",
           icon: "mdi-account-multiple-plus-outline",
@@ -116,7 +122,7 @@ export default {
         {
           title: "Payments",
           measure: null,
-          value: "TZS 1283924",
+          value: "TZS 1,283,924",
           color: "blue-grey darken-1",
           subtitle: "Total amount paid",
           icon: "mdi-currency-cny",
