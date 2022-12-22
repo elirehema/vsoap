@@ -12,7 +12,8 @@ const mixins = {
     'chart-line-gradient': () => import('@/components/charts/apex-line-gradient.vue'),
     'chart-line': () => import('@/components/charts/apex-line.vue'),
     'chart-pie': () => import('@/components/charts/apex-pie.vue'),
-    'chart-smooth-line': () => import('@/components/charts/apex-smooth-line.vue')
+    'chart-smooth-line': () => import('@/components/charts/apex-smooth-line.vue'),
+    'summarycard': () => import('@/components/charts/summary-card.vue')
   },
   data () {
     return {
