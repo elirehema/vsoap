@@ -224,12 +224,11 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
-      <v-container v-if="item.status != 'paid'">
-        <v-icon small class="mr-2" v-on:click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-      </v-container>
+    <template v-slot:item.updatedAt="{ item }">
+      <span>{{ item.updatedAt | dateformat }}</span>
+    </template>
+    <template v-slot:item.createdAt="{ item }">
+      <span>{{ item.createdAt | dateformat }}</span>
     </template>
     <template v-slot:item.status="{ item }">
       <v-chip small color="success" label text-color="white">
@@ -256,13 +255,10 @@ export default {
       headers: [
         { text: "Order No.#", value: "orderNumber" },
         { text: "Total Amount", value: "amount" },
-        { text: "Control Number", value: "controlNumber" },
         { text: "Status", value: "status" },
         { text: "Created On", value: "createdAt" },
-        { text: "Customer Id", value: "CustomerId" },
 
         { text: "Updated On", value: "updatedAt" },
-        { text: "Actions", value: "actions", sortable: false },
       ],
       ords: [],
       editedIndex: -1,

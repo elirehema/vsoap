@@ -9,6 +9,7 @@ const mixins = {
     'chart-bar': () => import('@/components/charts/apex-bar.vue'),
     'chart-basic-bar': () => import('@/components/charts/apex-basic-bar.vue'),
     'chart-donut': () => import('@/components/charts/apex-donut.vue'),
+    'chart-gradient-donut': () => import('@/components/charts/apex-donut-gradient.vue'),
     'chart-line-gradient': () => import('@/components/charts/apex-line-gradient.vue'),
     'chart-line': () => import('@/components/charts/apex-line.vue'),
     'chart-pie': () => import('@/components/charts/apex-pie.vue'),
