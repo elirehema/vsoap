@@ -6,7 +6,13 @@
     <v-row class="mt-4">
 
       <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
-        <v-card class="pa-0 ma-0" rounded>
+      <v-row>
+      <v-col  v-for="i in 4" :key="i">
+        <summary-card class="pa-0 my-1" v-if="sum" :item="sum" />
+
+      </v-col>
+      </v-row>
+        <v-card color="#FAFAFA" class="pa-0 ma-0" rounded>
           <v-card-title>
             <v-icon large left>
               mdi-chart-multiple
@@ -18,33 +24,24 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="12" md="2" class="pa-0 mt-1">
-
-        <summary-card v-for="i in 4" class="pa-0 my-1" v-if="sum" :item="sum" />
-
-        <skeleton-summary-card v-else></skeleton-summary-card>
+      <v-col cols="12" xs="12" md="4">
+       <v-row>
+        <v-col cols="12" xs="12" md="6">
+          <chart-gradient-donut />
+        </v-col>
+        <v-col cols="12" sm="12" md="6">
+          <chart-gradient-donut />
+          
+        </v-col>
+        <v-col cols="12">
+          <v-card>
+            <chart-bar />
+          </v-card>
+        </v-col>
+       </v-row>
       </v-col>
-      <v-col cols="12" sm="12" md="2" class="py-0 mt-1">
-      <chart-gradient-donut/>
 
-        <summary-card v-for="i in 4" :key="i" class="pa-0 my-1" v-if="sum" :item="sum" />
-
-        <skeleton-summary-card v-else></skeleton-summary-card>
-      </v-col>
-
-      <v-col cols="12" sm="12" md="12"> </v-col>
-      <v-col cols="12" sm="12" md="4">
-        <v-card min-height="400" flat outlined>
-          <v-sparkline :value="value" :gradient="gradient" :smooth="radius || false" :padding="padding"
-            :line-width="width" :stroke-linecap="lineCap" :gradient-direction="gradientDirection" :fill="fill"
-            :type="type" :auto-line-width="autoLineWidth" auto-draw />
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="12" md="4">
-        <v-card flat outlined class="pa-2">
-          <chart-bar />
-        </v-card>
-      </v-col>
+     
 
     </v-row>
   </v-container>
