@@ -50,7 +50,7 @@ export default {
           curve: "smooth",
         },
         title: {
-          text: "Average High & Low Temperature",
+          //text: "Average High & Low Temperature",
           align: "left",
           margin: 10,
           offsetX: 0,

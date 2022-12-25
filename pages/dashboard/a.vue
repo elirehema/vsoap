@@ -17,10 +17,10 @@
             <v-icon large left>
               mdi-chart-multiple
             </v-icon>
-            <span class="text-h6 font-weight-bold">Credit Vs Token purchases</span>
+            <span class="text-h6 font-weight-bold">Average power factor</span>
           </v-card-title>
           <v-card-text>
-            <chart-area-spline height="450" :data="splinedata" />
+            <chart-line height="450" :data="splinedata" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -79,27 +79,23 @@ export default {
       splinedata: {
         series: [
           {
-            name: "Credit Purchases",
-            data: [31, 40, 28, 51, 42, 109, 100],
-          },
-          {
-            name: "Token Purchases",
-            data: [11, 32, 45, 32, 34, 52, 41],
-          },
+            name: "Average power factor",
+            data: [0.49, 0.4, 0.41, 0.45, 0.40, 0.40, 0.499],
+          }
         ],
         categories: ["Jan", "Feb", "March", "April", "May", "Jun", "Jul"],
       },
 
       summaries: [
         {
-          title: "Tenants",
+          title: "Clients",
           measure: null,
           value: "2597",
           color: "primary",
-          subtitle: "Total number of registered tenants",
-          icon: "mdi-home-group",
+          subtitle: "Total number of registered clients",
+          icon: "mdi-account-group",
         },
-        {
+       /**{
           title: "Landloards",
           measure: null,
           value: "265",
@@ -108,13 +104,14 @@ export default {
           icon: "mdi-account-tie",
         },
         {
-          title: "Partners",
+          title: "Patners",
           measure: null,
           value: "1",
           color: "lime darken-1",
           subtitle: "Number of registered partners",
           icon: "mdi-account-multiple-plus-outline",
         },
+        **/
         {
           title: "Payments",
           measure: null,
@@ -124,20 +121,28 @@ export default {
           icon: "mdi-currency-cny",
         },
         {
+          title: "Balance",
+          measure: null,
+          value: "Tsh 1,300,230",
+          color: "lime darken-1",
+          subtitle: "Total amount of balance",
+          icon: "mdi-credit-card-refresh-outline",
+        },
+        {
           title: "Meters",
           measure: null,
           value: "12,376",
           color: "grey darken-1",
-          subtitle: "Number of registered meters",
+          subtitle: "Meters assigned in this site",
           icon: "mdi-car-speed-limiter",
         },
         {
-          title: "Sites",
+          title: "Power factor",
           measure: null,
-          value: "376",
+          value: "1.7 PF",
           color: "grey darken-1",
-          subtitle: "Number of registered sites",
-          icon: "mdi-office-building-marker-outline",
+          subtitle: "Last average power factor recorded",
+          icon: "mdi-home-battery-outline",
         },
       ],
       piedata: {

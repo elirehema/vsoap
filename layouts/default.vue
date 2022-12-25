@@ -101,7 +101,7 @@
       </v-btn>
       <v-btn
         icon
-        dark
+        dark to="/dashboard/a"
       >
         <v-icon>mdi-selection</v-icon>
       </v-btn>
