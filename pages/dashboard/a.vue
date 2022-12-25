@@ -80,7 +80,7 @@ export default {
         series: [
           {
             name: "Average power factor",
-            data: [0.49, 0.4, 0.41, 0.45, 0.40, 0.40, 0.499],
+            data: [0.15, 0.4, 0.41, 0.412, 0.40, 0.40, 0.499,],
           }
         ],
         categories: ["Jan", "Feb", "March", "April", "May", "Jun", "Jul"],
