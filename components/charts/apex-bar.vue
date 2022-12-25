@@ -42,7 +42,7 @@ export default {
           offsetY: -25,
           style: {
             fontSize: "10px",
-            colors: ["#304758"],
+            colors: ["#58508D"],
           },
         },
 
