@@ -14,110 +14,8 @@
         >
 
         <v-spacer></v-spacer>
-        <v-dialog v-model="editdialog" max-width="500px">
-          <template v-if="false" v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="success"
-              dark
-              class="mb-2 px-4"
-              v-bind="attrs"
-              v-on="on"
-            >
-              <v-icon left> mdi-plus </v-icon>
-              Create new purchase
-            </v-btn>
-          </template>
-          <v-card>
-            <v-toolbar color="primary" flat dark>
-              <v-toolbar-title
-                ><span class="text-h5">{{ formTitle }}</span></v-toolbar-title
-              >
-
-              <v-spacer></v-spacer>
-            </v-toolbar>
-
-            <v-card-text>
-              <v-container>
-                <v-row class="d-flex justify-space-between">
-                  <v-col
-                    v-if="editedItem.statusCode == '100'"
-                    cols="12"
-                    sm="12"
-                    md="4"
-                  >
-                    <v-btn
-                      small
-                      class="px-8"
-                      color="blue lighten-2"
-                      @click="makeOrderPayment(200)"
-                      dark
-                    >
-                      <v-icon left>mdi-check-all</v-icon>
-                      Approve</v-btn
-                    >
-                  </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode == '200'"
-                    cols="12"
-                    sm="12"
-                    md="4"
-                  >
-                    <v-btn
-                      small
-                      class="px-8"
-                      color="success"
-                      @click="makeOrderPayment(300)"
-                    >
-                      <v-icon left>mdi-progress-check</v-icon>Process</v-btn
-                    >
-                  </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode == '300'"
-                    cols="12"
-                    sm="12"
-                    md="4"
-                  >
-                    <v-btn
-                      small
-                      class="px-8"
-                      color="success"
-                      @click="makeOrderPayment(400)"
-                    >
-                      <v-icon left>mdi-account-credit-card</v-icon>Make
-                      Payment</v-btn
-                    >
-                  </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode != '400'"
-                    cols="12"
-                    sm="12"
-                    md="4"
-                  >
-                    <v-btn
-                      small
-                      class="px-8"
-                      color="warning"
-                      @click="makeOrderPayment(500)"
-                      >Cancel</v-btn
-                    >
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="editdialog = !editdialog"
-              >
-                Cancel
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialog" max-width="50%">
+      
+        <v-dialog v-model="dialog" max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               color="success"
@@ -135,17 +33,12 @@
               <v-toolbar-title
                 ><span class="text-h5">{{ formTitle }}</span></v-toolbar-title
               >
-
-              <v-spacer></v-spacer>
-              <v-btn color="white" @click="addProduct" icon>
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
             </v-toolbar>
 
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="12" md="4">
+                  <v-col cols="12" sm="12" md="4" v-if="false">
                     <v-select
                       v-model="editedItem.productId"
                       :items="products"
@@ -161,7 +54,7 @@
                     >
                     </v-select>
                   </v-col>
-                  <v-col cols="12" sm="12" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <v-select
                       v-model="editedItem.serialNumber"
                       :items="meters"
@@ -176,7 +69,7 @@
                     >
                     </v-select>
                   </v-col>
-                  <v-col cols="12" sm="12" md="4">
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       v-model="editedItem.msisdn"
                       label="Phone Number"
@@ -200,8 +93,8 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+              <v-btn color="primary lighten-1" small class="px-4" @click="close"> Cancel </v-btn>
+              <v-btn color="warning darken-1" small class="px-4"  @click="save"> Purchase </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -251,7 +144,6 @@ export default {
     return {
       dialog: false,
       dialogDelete: false,
-      editdialog: false,
       headers: [
         { text: "Order No.#", value: "orderNumber" },
         { text: "Total Amount", value: "amount" },
@@ -281,34 +173,14 @@ export default {
       meters: "meters",
     }),
     formTitle() {
-      return this.editedIndex === -1 ? "Place new order" : "Edit customer";
+      return this.editedIndex === -1 ? "Token Purchase" : "Edit customer";
     },
   },
   created() {
     this.$store.dispatch("_fetchtokenpurchases");
   },
   methods: {
-    editItem(item) {
-      this.editedIndex = this.orders.indexOf(item);
-      console.log(item);
 
-      this.editedItem = Object.assign({}, item);
-
-      this.editedItem.meterId = item.MeterId;
-      this.paymentreq.orderId = this.editedItem.id;
-      this.editdialog = true;
-    },
-
-    deleteItem(item) {
-      this.editedIndex = this.orders.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
-    },
-
-    deleteItemConfirm() {
-      this.orders.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
 
     close() {
       this.dialog = false;
