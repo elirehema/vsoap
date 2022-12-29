@@ -55,7 +55,7 @@
                     </v-select>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-select
+                    <v-autocomplete
                       v-model="editedItem.serialNumber"
                       :items="meters"
                       :item-text="'meterNumber'"
@@ -67,7 +67,7 @@
                       persistent-hint
                       single-line
                     >
-                    </v-select>
+                    </v-autocomplete>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field

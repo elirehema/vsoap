@@ -76,7 +76,7 @@
                     </v-select>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
-                    <v-select
+                    <v-autocomplete
                       v-model="editedItem.siteId"
                       :items="sites"
                       :item-text="'name'"
@@ -88,7 +88,7 @@
                       persistent-hint
                       single-line
                     >
-                    </v-select>
+                    </v-autocomplete>
                   </v-col>
                 </v-row>
               </v-container>
@@ -181,7 +181,7 @@ export default {
       types: "metertypes",
     }),
     formTitle() {
-      return this.editedIndex === -1 ? "Add new site" : "Edit site";
+      return this.editedIndex === -1 ? "Register new meter" : "Update meter infos";
     },
   },
   created() {
