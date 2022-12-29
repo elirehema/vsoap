@@ -38,12 +38,11 @@
 
             <v-card-text>
               <v-container>
-                <v-row class="d-flex justify-space-between">
+                <v-row class="d-flex justify-space-between py-3">
                   <v-col
                     v-if="editedItem.statusCode == '100'"
                     cols="12"
                     sm="12"
-                    md="4"
                   >
                     <v-btn
                       small
@@ -51,6 +50,7 @@
                       color="blue lighten-2"
                       @click="makeOrderPayment(200)"
                       dark
+                      block
                     >
                       <v-icon left>mdi-check-all</v-icon>
                       Approve</v-btn
@@ -60,12 +60,12 @@
                     v-if="editedItem.statusCode == '200'"
                     cols="12"
                     sm="12"
-                    md="4"
                   >
                     <v-btn
                       small
                       class="px-8"
                       color="success"
+                      block
                       @click="makeOrderPayment(300)"
                     >
                       <v-icon left>mdi-progress-check</v-icon>Process</v-btn
@@ -75,13 +75,13 @@
                     v-if="editedItem.statusCode == '300'"
                     cols="12"
                     sm="12"
-                    md="4"
                   >
                     <v-btn
                       small
                       class="px-8"
                       color="success"
                       @click="makeOrderPayment(400)"
+                      block
                     >
                       <v-icon left>mdi-account-credit-card</v-icon>Make
                       Payment</v-btn
@@ -91,14 +91,14 @@
                     v-if="editedItem.statusCode != '400'"
                     cols="12"
                     sm="12"
-                    md="4"
                   >
                     <v-btn
                       small
                       class="px-8"
                       color="warning"
                       @click="makeOrderPayment(500)"
-                      >Cancel</v-btn
+                      block
+                      >Cancel purchase</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -112,7 +112,7 @@
                 text
                 @click="editdialog = !editdialog"
               >
-                Cancel
+                Close
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -137,44 +137,55 @@
               >
 
               <v-spacer></v-spacer>
-              <v-btn color="white" @click="addProduct" icon>
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
             </v-toolbar>
 
             <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="6">
-                    <v-select
-                      v-model="editedItem.productId"
-                      :items="products"
-                      :item-text="'name'"
-                      :item-value="'id'"
-                      label="Select Product"
-                      v-on:focus="$store.dispatch('_fetchproducts')"
-                      :rules="[rules.required]"
-                      name="editedItem.productId"
-                      persistent-hint
-                      readonly
-                      single-line
-                    >
-                    </v-select>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      v-model="editedItem.amount"
-                      label="Purchase Amount"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-container>
+                  <v-row class="mt-5">
+                    <v-col cols="12" sm="12" md="6" v-if="false">
+                      <v-select
+                        v-model="editedItem.productId"
+                        :items="products"
+                        :item-text="'name'"
+                        :item-value="'id'"
+                        label="Select Product"
+                        v-on:focus="$store.dispatch('_fetchproducts')"
+                        :rules="[rules.required]"
+                        name="editedItem.productId"
+                        persistent-hint
+                        readonly
+                        single-line
+                      >
+                      </v-select>
+                    </v-col>
+                    <v-col cols="12" sm="12">
+                      <v-text-field
+                        v-model="editedItem.amount"
+                        label="Credit amount"
+                        :rules="[v => !!v || 'Amount is required']"
+                        outlined type="number"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+              <v-btn
+                color="blue lighten-1"
+                dark
+                small
+                class="px-5"
+                @click="close"
+              >
+                Cancel
+              </v-btn>
+              <v-btn color="warning darken-1" small class="px-5" @click="save">
+                Place
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -198,13 +209,11 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      
       <v-container @click.stop v-if="item.status != 'paid'">
         <v-icon small class="mr-2" v-on:click="editItem(item)">
           mdi-pencil
         </v-icon>
       </v-container>
-    
     </template>
     <template v-slot:item.status="{ item }">
       <v-chip small color="success" label text-color="white">
@@ -228,6 +237,7 @@ export default {
       dialog: false,
       dialogDelete: false,
       editdialog: false,
+      valid: true,
       headers: [
         { text: "Order No.#", value: "orderNumber" },
         { text: "Total Amount", value: "amount" },
@@ -259,7 +269,9 @@ export default {
       products: "products",
     }),
     formTitle() {
-      return this.editedIndex === -1 ? "Place new order" : "Edit customer";
+      return this.editedIndex === -1
+        ? "Initiate Bulk Credit Purchase order"
+        : "Update purchase";
     },
   },
   created() {
@@ -303,8 +315,8 @@ export default {
         this.editedIndex = -1;
       });
     },
-    handleRowClick(v){
-      this.$router.push(`/purchases/${v.id}`)
+    handleRowClick(v) {
+      this.$router.push(`/purchases/${v.id}`);
     },
     addProduct() {
       this.ords.push(this.editedItem);
@@ -320,13 +332,15 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         this.$store.dispatch("_updateproduct", this.editedItem);
+        this.close();
       } else {
-        var payload = [this.editedItem];
-        console.log(payload);
-
-        this.$store.dispatch("_placenewbulkorder", payload);
+        if (this.$refs.form.validate()) {
+          var payload = [this.editedItem];
+          this.$store.dispatch("_placenewbulkorder", payload);
+          this.close();
+        }
       }
-      this.close();
+      
     },
     getStatusColor(v) {
       switch (v) {
