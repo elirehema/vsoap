@@ -8,7 +8,7 @@
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h4 white--text">Meters</v-toolbar-title>
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">Meters</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="600px">
@@ -161,7 +161,7 @@ export default {
         { text: "Meter Number", value: "meterNumber" },
          { text: "Credit Balance", value: "creditBalance" },
         { text: "Description", value: "description" },
-        { text: "Site ID", value: "siteId" },
+        { text: "Site Code", value: "site.code" },
         { text: "MeterType ID", value: "meterTypeId" },
         { text: "Actions", value: "actions", sortable: false },
       ],
