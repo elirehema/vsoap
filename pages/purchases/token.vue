@@ -107,6 +107,9 @@
     <template v-slot:item.createdAt="{ item }">
       <span>{{ item.createdAt | dateformat }}</span>
     </template>
+    <template v-slot:item.orderNumber="{ item }">
+      <span   style="max-width: 150px;" class="d-inline-block text-truncate">{{ item.orderNumber }}</span>
+    </template>
     <template v-slot:item.status="{ item }">
       <v-chip small color="success" label text-color="white">
         <v-icon :color="getStatusColor(item.statusCode)" left>

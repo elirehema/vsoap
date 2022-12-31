@@ -247,6 +247,9 @@
     <template v-slot:item.updatedAt="{ item }">
       <span>{{ item.updatedAt | dateformat }}</span>
     </template>
+    <template v-slot:item.orderNumber="{ item }">
+      <span   style="max-width: 150px;" class="d-inline-block text-truncate">{{ item.orderNumber }}</span>
+    </template>
     <template v-slot:item.createdAt="{ item }">
       <span>{{ item.createdAt | dateformat }}</span>
     </template>
