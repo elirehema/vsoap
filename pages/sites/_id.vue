@@ -5,7 +5,6 @@
     </v-row>
     <v-row class="mt-4">
       <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
-     
         <v-card color="#FAFAFA" class="pa-0 ma-0" rounded>
           <v-card-title>
             <v-icon left> mdi-finance </v-icon>
@@ -16,48 +15,43 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" xs="12" md="4" class="pa-1 ma-0">
-        <v-card >
-              <v-card-title class="text-h6">Average consumption and cost</v-card-title>
-              <v-card-text>
-                <chart-column />
-                </v-card-text>
-            </v-card>
+      <v-col cols="12" sm="12" md="4" class="pa-1 ma-0">
+        <v-card>
+          <v-card-title class="text-h6"
+            >Average consumption and cost</v-card-title
+          >
+          <v-card-text>
+            <chart-column />
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col cols="12" sm="12" md="8">
-
         <v-row>
-      <v-col  v-for="(power,i) in powers" :key="i"  cols="3">
-        
-      <summary-power :power="power"/>
+          <v-col v-for="(power, i) in powers" :key="i" cols="12" sm="12" md="4" lg="3">
+            <summary-power :power="power" />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col v-for="(voltage, i) in voltages" :key="i" cols="12" sm="12" md="4" lg="3">
+            <summary-voltage :voltage="voltage" />
+          </v-col>
+        </v-row>
+      </v-col>
 
-      </v-col>
-      </v-row>
-      </v-col>
-    
       <v-col cols="12" xs="12" md="4">
         <v-row no gutt>
-          
-          <!--<v-col cols="12">
-            <v-card>
-              <v-card-title>Average consumption and cost</v-card-title>
-              <v-card-text>
-                <chart-column />
-                </v-card-text>
-            </v-card>
-          </v-col>-->
           <v-col cols="12" xs="12" md="6">
-          <v-card color="#FAFAFA" height="300px">
-            <v-card-text>
-              <chart-gradient-donut />
-            </v-card-text>
+            <v-card color="#FAFAFA" height="300px">
+              <v-card-text>
+                <chart-gradient-donut />
+              </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="12" xs="12" md="6">
-          <v-card color="#FAFAFA" height="300px">
-            <v-card-text>
-              <chart-gradient-donut />
-            </v-card-text>
+            <v-card color="#FAFAFA" height="300px">
+              <v-card-text>
+                <chart-gradient-donut />
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -159,32 +153,62 @@ export default {
       piedata: {
         title: "Lorem Ispum dolor",
       },
-      powers:[
+      powers: [
         {
-          min:"12:18:42",
+          min: "12:18:42",
           max: "0.40",
           line: "Line 1",
-          value: "0"
+          value: "0",
         },
         {
-          min:"12:18:42",
+          min: "12:18:42",
           max: "0.03",
           line: "Line 2",
-          value: "0"
+          value: "0",
         },
         {
-          min:"12:18:42",
+          min: "12:18:42",
           max: "0.04",
           line: "Line 3",
-          value: "0"
+          value: "0",
         },
         {
-          min:"12:18:42",
+          min: "12:18:42",
           max: "0.47",
           line: "TOTAL ",
-          value: "0"
-        }
-      ]
+          value: "0",
+        },
+      ],
+      voltages: [
+        {
+          title:"Voltage",
+          min: "12:18:42",
+          max: "0.40",
+          line: "Line 1",
+          value: "0 V",
+        },
+        {
+          title:"Voltage",
+          min: "12:18:42",
+          max: "0.03",
+          line: "Line 2",
+          value: "0 V",
+        },
+        {
+          title:"Voltage",
+          min: "12:18:42",
+          max: "0.04",
+          line: "Line 3",
+          value: "0 V",
+        },
+        {
+          title:"Current",
+          min: "12:18:42",
+          max: "0.47",
+          line: "CURRENT ",
+          value: "0 A",
+        },
+      ],
     };
   },
   computed: {
