@@ -1,7 +1,6 @@
 <template>
-  <v-card color="#FAFAFA">
     <apexchart :height="height" :options="options" :series="series"></apexchart>
-  </v-card>
+
 </template>
 <script lang="js">
 export default {

@@ -15,7 +15,8 @@ const mixins = {
     'chart-pie': () => import('@/components/charts/apex-pie.vue'),
     'chart-column': () => import('@/components/charts/apex-column-chart.vue'),
     'chart-smooth-line': () => import('@/components/charts/apex-smooth-line.vue'),
-    'summarycard': () => import('@/components/charts/summary-card.vue')
+    'summarycard': () => import('@/components/charts/summary-card.vue'),
+    'summary-power': () => import('@/components/summary/card-power.vue')
   },
   data () {
     return {

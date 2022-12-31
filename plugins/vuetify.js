@@ -36,7 +36,8 @@ export default (ctx) => {
           teal: '#00897B',
           whitish: 'F5F5F5',
           deposit: '#14c416',
-          button: '#02532b'
+          button: '#02532b',
+          gold: "#FFD700"
         }
 
       }

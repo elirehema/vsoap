@@ -17,29 +17,48 @@
         </v-card>
       </v-col>
       <v-col cols="12" xs="12" md="4" class="pa-1 ma-0">
-        <v-card>
+        <v-card >
               <v-card-title class="text-h6">Average consumption and cost</v-card-title>
               <v-card-text>
                 <chart-column />
                 </v-card-text>
             </v-card>
       </v-col>
+      <v-col cols="12" sm="12" md="8">
+
+        <v-row>
+      <v-col  v-for="(power,i) in powers" :key="i"  cols="3">
+        
+      <summary-power :power="power"/>
+
+      </v-col>
+      </v-row>
+      </v-col>
+    
       <v-col cols="12" xs="12" md="4">
         <v-row no gutt>
           
-          <v-col cols="12">
+          <!--<v-col cols="12">
             <v-card>
               <v-card-title>Average consumption and cost</v-card-title>
               <v-card-text>
                 <chart-column />
                 </v-card-text>
             </v-card>
+          </v-col>-->
+          <v-col cols="12" xs="12" md="6">
+          <v-card color="#FAFAFA" height="300px">
+            <v-card-text>
+              <chart-gradient-donut />
+            </v-card-text>
+            </v-card>
           </v-col>
           <v-col cols="12" xs="12" md="6">
-            <chart-gradient-donut />
-          </v-col>
-          <v-col cols="12" sm="12" md="6">
-            <chart-gradient-donut />
+          <v-card color="#FAFAFA" height="300px">
+            <v-card-text>
+              <chart-gradient-donut />
+            </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-col>
@@ -140,6 +159,32 @@ export default {
       piedata: {
         title: "Lorem Ispum dolor",
       },
+      powers:[
+        {
+          min:"12:18:42",
+          max: "0.40",
+          line: "Line 1",
+          value: "0"
+        },
+        {
+          min:"12:18:42",
+          max: "0.03",
+          line: "Line 2",
+          value: "0"
+        },
+        {
+          min:"12:18:42",
+          max: "0.04",
+          line: "Line 3",
+          value: "0"
+        },
+        {
+          min:"12:18:42",
+          max: "0.47",
+          line: "TOTAL ",
+          value: "0"
+        }
+      ]
     };
   },
   computed: {
