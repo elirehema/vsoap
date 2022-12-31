@@ -8,10 +8,10 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="primary">
-        <v-toolbar-title class="text-h4 white--text">Customers</v-toolbar-title>
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">Customers</v-toolbar-title>
 
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               color="success"
@@ -61,7 +61,7 @@
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <v-select
+                    <v-autocomplete
                       v-model="editedItem.meterId"
                       :items="meters"
                       :item-text="'meterNumber'"
@@ -73,7 +73,7 @@
                       persistent-hint
                       single-line
                     >
-                    </v-select>
+                    </v-autocomplete>
                   </v-col>
                 </v-row>
               </v-container>

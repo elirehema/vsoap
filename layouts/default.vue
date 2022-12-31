@@ -9,7 +9,7 @@
       dark
       app
       height="100%"
-      style="max-height: 97.6%;"
+      style="max-height: 99.6%;"
     >
       <v-list>
         <v-list-item class="px-2">
@@ -150,24 +150,7 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
+   <v-footer
       :absolute="!fixed"
       app
     >
@@ -322,7 +305,6 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
       title: 'Vuetify.js',
       url: 'https://billing.payless.cloud/asset/img/logo.png',
       miniUrl: 'https://billing.payless.cloud/asset/img/logo.png'
