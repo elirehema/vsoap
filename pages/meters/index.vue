@@ -149,6 +149,7 @@ export default {
     return {
       dialog: false,
       dialogDelete: false,
+      loading: false,
       headers: [
         {
           text: "ID",
@@ -167,6 +168,9 @@ export default {
       ],
       desserts: [],
       editedIndex: -1,
+      rules: {
+        required: value => !!value || "Field Required",
+      },
       editedItem: {
         siteId:0,
         meterTypeId: 0,

@@ -9,7 +9,7 @@
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h5 font-weight-bold  white--text"
+        <v-toolbar-title class="text-h5 font-weight-bold white--text"
           >Bulk Purchases</v-toolbar-title
         >
 
@@ -163,8 +163,19 @@
                       <v-text-field
                         v-model="editedItem.amount"
                         label="Credit amount"
-                        :rules="[v => !!v || 'Amount is required']"
-                        outlined type="number"
+                        :rules="[(v) => !!v || 'Amount is required']"
+                        clearable
+                        type="number"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12">
+                      <v-text-field
+                        v-model="editedItem.controlNumber"
+                        label="Control number"
+                        :readOnly="!generatebutton"
+                        :rules="[(v) => !!v || 'Control Number is required']"
+                        clearable
+                        @click:clear="generatebutton = true"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -183,6 +194,16 @@
               >
                 Cancel
               </v-btn>
+              <v-btn
+                v-if="generatebutton"
+                color="primary lighten-1"
+                small
+                class="px-3"
+                @click="generateControlNumber"
+                :loading="loading"
+                :disabled="loading"
+                >Generate Token</v-btn
+              >
               <v-btn color="warning darken-1" small class="px-5" @click="save">
                 Place
               </v-btn>
@@ -223,6 +244,12 @@
         {{ item.status.toUpperCase() }}
       </v-chip>
     </template>
+    <template v-slot:item.updatedAt="{ item }">
+      <span>{{ item.updatedAt | dateformat }}</span>
+    </template>
+    <template v-slot:item.createdAt="{ item }">
+      <span>{{ item.createdAt | dateformat }}</span>
+    </template>
     <template v-slot:no-data>
       <v-btn color="primary"> Reset </v-btn>
     </template>
@@ -238,6 +265,8 @@ export default {
       dialogDelete: false,
       editdialog: false,
       valid: true,
+      loading: false,
+      generatebutton: true,
       headers: [
         { text: "Order No.#", value: "orderNumber" },
         { text: "Total Amount", value: "amount" },
@@ -251,8 +280,12 @@ export default {
       ],
       ords: [],
       editedIndex: -1,
+      rules: {
+        required: value => !!value || "Field Required",
+      },
       editedItem: {
         productId: 1,
+        controlNumber: "",
       },
       paymentreq: {
         action: 400,
@@ -260,6 +293,7 @@ export default {
       },
       defaultItem: {
         productId: 1,
+        controlNumber: "",
       },
     };
   },
@@ -323,12 +357,22 @@ export default {
     },
     makeOrderPayment(action) {
       this.paymentreq.action = action;
-
       this.$store.dispatch("_makeorderpayment", this.paymentreq).then((res) => {
         this.editdialog = false;
       });
     },
 
+    async generateControlNumber() {
+      this.loading = true;
+      await this.$axios
+        .$post("/api/orders/generate")
+        .then((response) => {
+          this.editedItem.controlNumber = response.controlNumber;
+          this.generatebutton = false;
+          this.loading = false;
+        })
+        .catch((err) => {});
+    },
     save() {
       if (this.editedIndex > -1) {
         this.$store.dispatch("_updateproduct", this.editedItem);
@@ -340,7 +384,6 @@ export default {
           this.close();
         }
       }
-      
     },
     getStatusColor(v) {
       switch (v) {

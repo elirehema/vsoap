@@ -130,6 +130,8 @@ export default {
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
       ],
+
+      loading: false,
       desserts: [],
       editedIndex: -1,
       editedItem: {},

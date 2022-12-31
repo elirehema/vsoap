@@ -149,6 +149,9 @@ export default {
         action: 400,
         orderId: null
       },
+      rules: {
+        required: value => !!value || "Field Required",
+      },
       defaultItem: {},
     };
   },

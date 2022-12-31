@@ -18,10 +18,7 @@ const mixins = {
   },
   data () {
     return {
-      rules: {
-        required: value => !!value || "Field Required",
-      },
-      loading: false,
+     
       loader: null
     }
   },

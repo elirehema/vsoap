@@ -102,6 +102,7 @@ export default {
     return {
       dialog: false,
       dialogDelete: false,
+      loading: false,
       headers: [
         {
           text: "ID",

@@ -138,6 +138,9 @@ export default {
       ],
       ords: [],
       editedIndex: -1,
+      rules: {
+        required: value => !!value || "Field Required",
+      },
       editedItem: {
         productId: 2,
       },
