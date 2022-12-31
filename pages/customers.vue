@@ -60,7 +60,7 @@
                       label="Email Address"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="12" md="12">
+                  <v-col cols="12" sm="12" md="6">
                     <v-autocomplete
                       v-model="editedItem.meterId"
                       :items="meters"
@@ -74,6 +74,12 @@
                       single-line
                     >
                     </v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="6">
+                    <v-text-field
+                      v-model="editedItem.code"
+                      label="Customer code"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -144,6 +150,7 @@ export default {
         { text: "Display Name", value: "displayName" },
         { text: "Mobile No.", value: "mobileNumber" },
         { text: "Email", value: "email" },
+        { text: "Code", value:"code" },
         { text: "Meter ID", value: "MeterId" },
         { text: "Actions", value: "actions", sortable: false },
       ],

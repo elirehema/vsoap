@@ -232,7 +232,7 @@ export default {
           icon: 'cog-transfer-outline',
           menus: [
             {
-              title: 'Customer',
+              title: 'Customers',
               icon: 'account-group',
               to: '/customers'
             },

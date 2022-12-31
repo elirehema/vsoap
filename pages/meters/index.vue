@@ -50,8 +50,8 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
-                      v-model="editedItem.mechantType"
-                      label="Mechant Type"
+                      v-model="editedItem.code"
+                      label="Meter Code"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
@@ -162,16 +162,19 @@ export default {
          { text: "Credit Balance", value: "creditBalance" },
         { text: "Description", value: "description" },
         { text: "Site Code", value: "site.code" },
-        { text: "MeterType ID", value: "meterTypeId" },
+        { text: "Meter Code", value: "code" },
         { text: "Actions", value: "actions", sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
       editedItem: {
         siteId:0,
-        meterTypeId: 0
+        meterTypeId: 0,
+        mechantType: "No value"
       },
-      defaultItem: {},
+      defaultItem: {
+        mechantType: "No value"
+      },
     };
   },
   computed: {
