@@ -18,7 +18,8 @@ const mixins = {
     'chart-semi-donut':()=> import('@/components/charts/apex-semi-donut.vue'),
     'summarycard': () => import('@/components/charts/summary-card.vue'),
     'summary-power': () => import('@/components/summary/card-power.vue'),
-    'summary-voltage': () => import('@/components/summary/card-voltage.vue')
+    'summary-voltage': () => import('@/components/summary/card-voltage.vue'),
+    'summary-consumption': () => import('@/components/summary/card-consuption.vue')
   },
   data () {
     return {

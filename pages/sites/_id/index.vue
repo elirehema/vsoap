@@ -17,9 +17,7 @@
       </v-col>
       <v-col cols="12" sm="12" md="4" class="pa-1 ma-0">
         <v-card>
-          <v-card-title class="text-h6"
-            >Average consumption and cost</v-card-title
-          >
+          <v-card-title class="text-h6">Average consumption and cost</v-card-title>
           <v-card-text>
             <chart-column />
           </v-card-text>
@@ -32,44 +30,57 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col v-for="(voltage, i) in voltages" :key="i" cols="12" sm="12" md="4" lg="3">
+          <v-col
+            v-for="(voltage, i) in voltages"
+            :key="i"
+            cols="12"
+            sm="12"
+            md="4"
+            lg="3"
+          >
             <summary-voltage :voltage="voltage" />
           </v-col>
+         
         </v-row>
       </v-col>
-     
 
       <v-col cols="12" xs="12" md="4">
         <v-row no gutt>
           <v-col cols="12" xs="12" md="6">
-            <v-card color="#FAFAFA" height="300px">
+            <v-card color="white" height="295px">
               <v-card-text>
                 <chart-gradient-donut />
               </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="12" xs="12" md="6">
-            <v-card color="#FAFAFA" height="300px">
+            <v-card color="white" height="295px">
               <v-card-text>
                 <chart-gradient-donut />
               </v-card-text>
             </v-card>
           </v-col>
+          <v-col cols="12" sm="12" md="12">
+          <summary-consumption />
+          </v-col>
         </v-row>
       </v-col>
+      
       <v-col cols="12" xs="12">
         <v-data-table
-    v-if="meters"
-    :headers="headers"
-    :items="meters"
-    sort-by="calories"
-    class="elevation-1"
-  >
-  <template v-slot:top>
-      <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h5 font-weight-bold white--text">Meters</v-toolbar-title>
-        </v-toolbar>
-        </template>
+          v-if="meters"
+          :headers="headers"
+          :items="meters"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar color="primary" flat>
+              <v-toolbar-title class="text-h5 font-weight-bold white--text"
+                >Meters</v-toolbar-title
+              >
+            </v-toolbar>
+          </template>
         </v-data-table>
         <skeleton-table-loader v-else />
       </v-col>
@@ -199,28 +210,28 @@ export default {
       ],
       voltages: [
         {
-          title:"Voltage",
+          title: "Voltage",
           min: "12:18:42",
           max: "0.40",
           line: "Line 1",
           value: "0 V",
         },
         {
-          title:"Voltage",
+          title: "Voltage",
           min: "12:18:42",
           max: "0.03",
           line: "Line 2",
           value: "0 V",
         },
         {
-          title:"Voltage",
+          title: "Voltage",
           min: "12:18:42",
           max: "0.04",
           line: "Line 3",
           value: "0 V",
         },
         {
-          title:"Current",
+          title: "Current",
           min: "12:18:42",
           max: "0.47",
           line: "CURRENT ",
@@ -237,7 +248,7 @@ export default {
 
         { text: "Serial No.", value: "serialNumber" },
         { text: "Meter Number", value: "meterNumber" },
-         { text: "Credit Balance", value: "creditBalance" },
+        { text: "Credit Balance", value: "creditBalance" },
         { text: "Description", value: "description" },
         { text: "Site Code", value: "site.code" },
         { text: "Meter Code", value: "code" },
