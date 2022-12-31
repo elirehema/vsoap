@@ -4,45 +4,45 @@
       <summarycard v-for="(summary, i) in summaries" :key="i" :data="summary" />
     </v-row>
     <v-row class="mt-4">
-
       <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
-      <v-row>
-      <v-col  v-for="i in 4" :key="i">
-        <summary-card class="pa-0 my-1" v-if="sum" :item="sum" />
-
-      </v-col>
-      </v-row>
+     
         <v-card color="#FAFAFA" class="pa-0 ma-0" rounded>
           <v-card-title>
-            <v-icon large left>
-              mdi-chart-multiple
-            </v-icon>
-            <span class="text-h6 font-weight-bold">Average power factor</span>
+            <v-icon left> mdi-finance </v-icon>
+            <span class="text-h6">Average power factor in year</span>
           </v-card-title>
           <v-card-text>
             <chart-line height="450" :data="splinedata" />
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" xs="12" md="4">
-       <v-row>
-        <v-col cols="12" xs="12" md="6">
-          <chart-gradient-donut />
-        </v-col>
-        <v-col cols="12" sm="12" md="6">
-          <chart-gradient-donut />
-          
-        </v-col>
-        <v-col cols="12">
-          <v-card>
-            <chart-bar />
-          </v-card>
-        </v-col>
-       </v-row>
+      <v-col cols="12" xs="12" md="4" class="pa-1 ma-0">
+        <v-card>
+              <v-card-title class="text-h6">Average consumption and cost</v-card-title>
+              <v-card-text>
+                <chart-column />
+                </v-card-text>
+            </v-card>
       </v-col>
-
-     
-
+      <v-col cols="12" xs="12" md="4">
+        <v-row no gutt>
+          
+          <v-col cols="12">
+            <v-card>
+              <v-card-title>Average consumption and cost</v-card-title>
+              <v-card-text>
+                <chart-column />
+                </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" xs="12" md="6">
+            <chart-gradient-donut />
+          </v-col>
+          <v-col cols="12" sm="12" md="6">
+            <chart-gradient-donut />
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -80,8 +80,8 @@ export default {
         series: [
           {
             name: "Average power factor",
-            data: [0.15, 0.4, 0.41, 0.412, 0.40, 0.40, 0.499,],
-          }
+            data: [0.15, 0.4, 0.41, 0.412, 0.4, 0.4, 0.499],
+          },
         ],
         categories: ["Jan", "Feb", "March", "April", "May", "Jun", "Jul"],
       },
@@ -95,7 +95,7 @@ export default {
           subtitle: "Total number of registered clients",
           icon: "mdi-account-group",
         },
-     
+
         {
           title: "Payments",
           measure: null,
@@ -105,7 +105,7 @@ export default {
           icon: "mdi-currency-cny",
         },
         {
-          title: "Credit Balance",
+          title: "Credits",
           measure: null,
           value: "Tsh 1,300,230",
           color: "lime darken-1",
@@ -121,6 +121,14 @@ export default {
           icon: "mdi-car-speed-limiter",
         },
         {
+          title: "DCUs",
+          measure: null,
+          value: "31",
+          color: "grey darken-1",
+          subtitle: "Number of DCUs in this site",
+          icon: "mdi-router-network",
+        },
+        {
           title: "Power factor",
           measure: null,
           value: "1.7 PF",
@@ -130,8 +138,8 @@ export default {
         },
       ],
       piedata: {
-        title: "Lorem Ispum dolor"
-      }
+        title: "Lorem Ispum dolor",
+      },
     };
   },
   computed: {
@@ -141,6 +149,17 @@ export default {
   },
   created() {
     this.$store.dispatch("_fetchstatistics");
+    this.requestSiteById();
+  },
+  methods: {
+    async requestSiteById() {
+      await this.$axios
+        .$get(`/api/sites/${this.$route.params.id}`)
+        .then((response) => {
+          this.site = response;
+        })
+        .catch((err) => {});
+    },
   },
 };
 </script>

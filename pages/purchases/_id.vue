@@ -18,7 +18,7 @@
         <v-chip
         
           color="teal lighten-1"
-          dark
+          dark small
           class="white--text font-weight-bold"
         >
           {{ order.status }}</v-chip

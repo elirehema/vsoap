@@ -5,13 +5,14 @@
     :items="sites"
     sort-by="calories"
     class="elevation-1"
+    @click:row="handleRowClick"
   >
     <template v-slot:top>
       <v-toolbar flat color="primary">
         <v-toolbar-title class="text-h4 white--text">Sites</v-toolbar-title>
 
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
@@ -85,8 +86,11 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
+      <v-container @click.stop>
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+   
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+    </v-container>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary"> Reset </v-btn>
@@ -131,7 +135,7 @@ export default {
       sites: "sites",
     }),
     formTitle() {
-      return this.editedIndex === -1 ? "Add new site" : "Edit site";
+      return this.editedIndex === -1 ? "Register new site" : "Update site infos";
     },
   },
   created() {
@@ -169,6 +173,9 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
+    },
+    handleRowClick(v) {
+      this.$router.push(`/sites/${v.id}`);
     },
 
     save() {
