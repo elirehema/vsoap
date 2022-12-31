@@ -5,21 +5,15 @@
     </v-row>
     <v-row class="mt-4">
       <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
-        <v-card color="#FAFAFA" class="pa-0 ma-0" rounded>
-          <v-card-title>
-            <v-icon left> mdi-finance </v-icon>
-            <span class="text-h6">Average power factor in year</span>
-          </v-card-title>
-          <v-card-text>
-            <chart-line height="450" :data="splinedata" />
-          </v-card-text>
-        </v-card>
+        
+
+        <summary-consumption />
       </v-col>
       <v-col cols="12" sm="12" md="4" class="pa-1 ma-0">
         <v-card>
           <v-card-title class="text-h6">Average consumption and cost</v-card-title>
           <v-card-text>
-            <chart-column />
+            <chart-column height="465"/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -42,6 +36,25 @@
           </v-col>
          
         </v-row>
+        
+      <v-col cols="12" xs="12" class="mt-5 pa-0 ma-0">
+        <v-data-table
+          v-if="meters"
+          :headers="headers"
+          :items="meters"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar color="primary" flat>
+              <v-toolbar-title class="text-h5 font-weight-bold white--text"
+                >Meters</v-toolbar-title
+              >
+            </v-toolbar>
+          </template>
+        </v-data-table>
+        <skeleton-table-loader v-else />
+      </v-col>
       </v-col>
 
       <v-col cols="12" xs="12" md="4">
@@ -61,29 +74,22 @@
             </v-card>
           </v-col>
           <v-col cols="12" sm="12" md="12">
-          <summary-consumption />
+          
+            <v-card color="#FAFAFA" class="pa-0 ma-0" rounded>
+          <v-card-title>
+            <v-icon left> mdi-finance </v-icon>
+            <span class="text-h6">Average power factor in year</span>
+          </v-card-title>
+          <v-card-text>
+            <chart-line height="450" :data="splinedata" />
+          </v-card-text>
+        </v-card>
+
           </v-col>
         </v-row>
       </v-col>
       
-      <v-col cols="12" xs="12">
-        <v-data-table
-          v-if="meters"
-          :headers="headers"
-          :items="meters"
-          sort-by="calories"
-          class="elevation-1"
-        >
-          <template v-slot:top>
-            <v-toolbar color="primary" flat>
-              <v-toolbar-title class="text-h5 font-weight-bold white--text"
-                >Meters</v-toolbar-title
-              >
-            </v-toolbar>
-          </template>
-        </v-data-table>
-        <skeleton-table-loader v-else />
-      </v-col>
+      
     </v-row>
   </v-container>
 </template>
