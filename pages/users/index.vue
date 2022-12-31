@@ -90,6 +90,9 @@
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
+    <template v-slot:item.CreatedAt="{ item }">
+      <span>{{ item.CreatedAt | dateformat }}</span>
+    </template>
     <template v-slot:no-data>
       <v-btn elevation="0"  
       :loading="loading"
@@ -122,7 +125,7 @@ export default {
           value: "firstName",
         },
         { text: "Display Name", value: "displayName" },
-        { text: "Mobile No.", value: "mobileNo" },
+        { text: "Mobile No.", value: "mobileNumber" },
         { text: "Email", value: "email" },
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
