@@ -37,6 +37,7 @@
           </v-col>
         </v-row>
       </v-col>
+     
 
       <v-col cols="12" xs="12" md="4">
         <v-row no gutt>
@@ -55,6 +56,22 @@
             </v-card>
           </v-col>
         </v-row>
+      </v-col>
+      <v-col cols="12" xs="12">
+        <v-data-table
+    v-if="meters"
+    :headers="headers"
+    :items="meters"
+    sort-by="calories"
+    class="elevation-1"
+  >
+  <template v-slot:top>
+      <v-toolbar color="primary" flat>
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">Meters</v-toolbar-title>
+        </v-toolbar>
+        </template>
+        </v-data-table>
+        <skeleton-table-loader v-else />
       </v-col>
     </v-row>
   </v-container>
@@ -81,6 +98,7 @@ export default {
       width: 2,
       radius: 10,
       padding: 8,
+      meters: null,
       lineCap: "round",
       gradient: gradients[5],
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
@@ -209,6 +227,21 @@ export default {
           value: "0 A",
         },
       ],
+      headers: [
+        {
+          text: "ID",
+          align: "start",
+          sortable: false,
+          value: "id",
+        },
+
+        { text: "Serial No.", value: "serialNumber" },
+        { text: "Meter Number", value: "meterNumber" },
+         { text: "Credit Balance", value: "creditBalance" },
+        { text: "Description", value: "description" },
+        { text: "Site Code", value: "site.code" },
+        { text: "Meter Code", value: "code" },
+      ],
     };
   },
   computed: {
@@ -219,6 +252,7 @@ export default {
   created() {
     this.$store.dispatch("_fetchstatistics");
     this.requestSiteById();
+    this.getSiteMetersBySiteId();
   },
   methods: {
     async requestSiteById() {
@@ -226,6 +260,14 @@ export default {
         .$get(`/api/sites/${this.$route.params.id}`)
         .then((response) => {
           this.site = response;
+        })
+        .catch((err) => {});
+    },
+    async getSiteMetersBySiteId() {
+      await this.$axios
+        .$get(`/api/sites/${this.$route.params.id}/meters`)
+        .then((response) => {
+          this.meters = response;
         })
         .catch((err) => {});
     },

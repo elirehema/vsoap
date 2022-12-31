@@ -16,7 +16,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 350
+      default: 250
     },
 
   },
@@ -58,7 +58,7 @@ export default {
           },
           grid: {
             padding: {
-              bottom: -120,
+              bottom: -80,
             },
           },
           dataLabels: {
@@ -83,7 +83,7 @@ export default {
               breakpoint: 480,
               options: {
                 chart: {
-                  width: 200,
+                  width: 160,
                 },
                 legend: {
                   position: "bottom",
