@@ -20,7 +20,6 @@ const state = () => ({
       commit('GET_METERS')
       await this.$axios.$get('/api/meters')
         .then((response) => {
-          console.log(response)
           commit('GET_METERS_SUCCESS', response)
         }).catch((err) => {
           commit('GET_METERS_ERROR', err)

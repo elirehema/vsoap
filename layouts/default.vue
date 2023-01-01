@@ -210,7 +210,8 @@ export default {
             },
             {
               title: 'DCUs',
-              icon: 'gauge'
+              icon: 'gauge',
+              to: '/meters/dcu'
             },
          
    
