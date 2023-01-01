@@ -16,13 +16,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="editdialog" max-width="500px">
           <template v-if="false" v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="success"
-              dark
-              class="mb-2 px-4"
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn color="success" dark class="mb-2 px-4" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
               Create new Purchase
             </v-btn>
@@ -39,11 +33,17 @@
             <v-card-text>
               <v-container>
                 <v-row class="d-flex justify-space-between py-3">
-                  <v-col
-                    v-if="editedItem.statusCode == '100'"
-                    cols="12"
-                    sm="12"
-                  >
+                  <v-col cols="12" sm="12" v-if="editedItem.statusCode == '200'">
+                    <v-text-field
+                      v-model="paymentreq.controlNumber"
+                      label="Control number"
+                      :readOnly="!generatebutton"
+                      :rules="[(v) => !!v || 'Control Number is required']"
+                      clearable
+                      @click:clear="generatebutton = true"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col v-if="editedItem.statusCode == '100'" cols="12" sm="12">
                     <v-btn
                       small
                       class="px-8"
@@ -56,11 +56,7 @@
                       Approve</v-btn
                     >
                   </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode == '200'"
-                    cols="12"
-                    sm="12"
-                  >
+                  <v-col v-if="editedItem.statusCode == '200'" cols="12" sm="12">
                     <v-btn
                       small
                       class="px-8"
@@ -71,11 +67,7 @@
                       <v-icon left>mdi-progress-check</v-icon>Process</v-btn
                     >
                   </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode == '300'"
-                    cols="12"
-                    sm="12"
-                  >
+                  <v-col v-if="editedItem.statusCode == '300'" cols="12" sm="12">
                     <v-btn
                       small
                       class="px-8"
@@ -83,15 +75,10 @@
                       @click="makeOrderPayment(400)"
                       block
                     >
-                      <v-icon left>mdi-account-credit-card</v-icon>Make
-                      Payment</v-btn
+                      <v-icon left>mdi-account-credit-card</v-icon>Make Payment</v-btn
                     >
                   </v-col>
-                  <v-col
-                    v-if="editedItem.statusCode != '400'"
-                    cols="12"
-                    sm="12"
-                  >
+                  <v-col v-if="editedItem.statusCode != '400'" cols="12" sm="12">
                     <v-btn
                       small
                       class="px-8"
@@ -101,17 +88,26 @@
                       >Cancel purchase</v-btn
                     >
                   </v-col>
+                  <v-col cols="12" sm="12" v-if="editedItem.statusCode == '200'">
+                    <v-btn
+                      block
+                      v-if="generatebutton"
+                      color="primary lighten-1"
+                      small
+                      class="px-3"
+                      @click="generateControlNumber"
+                      :loading="loading"
+                      :disabled="loading"
+                      >Generate Token</v-btn
+                    >
+                  </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="editdialog = !editdialog"
-              >
+              <v-btn color="blue darken-1" text @click="editdialog = !editdialog">
                 Close
               </v-btn>
             </v-card-actions>
@@ -119,13 +115,7 @@
         </v-dialog>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="success"
-              dark
-              class="mb-2 px-4"
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn color="success" dark class="mb-2 px-4" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
               Initiate bulk credit purchase
             </v-btn>
@@ -168,7 +158,7 @@
                         type="number"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="12">
+                    <v-col cols="12" sm="12" v-if="false">
                       <v-text-field
                         v-model="editedItem.controlNumber"
                         label="Control number"
@@ -185,17 +175,11 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="blue lighten-1"
-                dark
-                small
-                class="px-5"
-                @click="close"
-              >
+              <v-btn color="blue lighten-1" dark small class="px-5" @click="close">
                 Cancel
               </v-btn>
               <v-btn
-                v-if="generatebutton"
+                v-if="false"
                 color="primary lighten-1"
                 small
                 class="px-3"
@@ -217,12 +201,8 @@
             >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
-                >Cancel</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                >OK</v-btn
-              >
+              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -231,16 +211,12 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-container @click.stop v-if="item.status != 'paid'">
-        <v-icon small class="mr-2" v-on:click="editItem(item)">
-          mdi-pencil
-        </v-icon>
+        <v-icon small class="mr-2" v-on:click="editItem(item)"> mdi-pencil </v-icon>
       </v-container>
     </template>
     <template v-slot:item.status="{ item }">
       <v-chip small color="success" label text-color="white">
-        <v-icon :color="getStatusColor(item.statusCode)" left>
-          mdi-label
-        </v-icon>
+        <v-icon :color="getStatusColor(item.statusCode)" left> mdi-label </v-icon>
         {{ item.status.toUpperCase() }}
       </v-chip>
     </template>
@@ -248,7 +224,9 @@
       <span>{{ item.updatedAt | dateformat }}</span>
     </template>
     <template v-slot:item.orderNumber="{ item }">
-      <span   style="max-width: 150px;" class="d-inline-block text-truncate">{{ item.orderNumber }}</span>
+      <span style="max-width: 150px" class="d-inline-block text-truncate">{{
+        item.orderNumber
+      }}</span>
     </template>
     <template v-slot:item.createdAt="{ item }">
       <span>{{ item.createdAt | dateformat }}</span>
@@ -284,7 +262,7 @@ export default {
       ords: [],
       editedIndex: -1,
       rules: {
-        required: value => !!value || "Field Required",
+        required: (value) => !!value || "Field Required",
       },
       editedItem: {
         productId: 1,
@@ -293,6 +271,7 @@ export default {
       paymentreq: {
         action: 400,
         orderId: null,
+        controlNumber: "",
       },
       defaultItem: {
         productId: 1,
@@ -322,6 +301,7 @@ export default {
       this.editedItem = Object.assign({}, item);
 
       this.editedItem.meterId = item.MeterId;
+      this.paymentreq.controlNumber = item.controlNumber;
       this.paymentreq.orderId = this.editedItem.id;
       this.editdialog = true;
     },
@@ -370,8 +350,8 @@ export default {
       await this.$axios
         .$post("/api/orders/generate")
         .then((response) => {
-          this.editedItem.controlNumber = response.controlNumber;
-          this.generatebutton = false;
+          this.paymentreq.controlNumber = response.controlNumber;
+          //this.generatebutton = false;
           this.loading = false;
         })
         .catch((err) => {});

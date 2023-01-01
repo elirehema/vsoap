@@ -3,6 +3,7 @@
     <v-card-title>Consumption & Costs</v-card-title>
     <v-card-text>
         <v-data-table 
+        dense
     :headers="headers"
     :items="consumptions"
     sort-by="calories"
