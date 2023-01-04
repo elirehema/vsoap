@@ -259,15 +259,18 @@ export default {
           menus: [
             {
               title: 'Clear tamper',
-              icon: 'close-circle-outline'
+              icon: 'close-circle-outline',
+              to:'/vending/tamper'
             },
             {
               title: 'Clear Credit token',
-              icon: 'close-circle'
+              icon: 'close-circle',
+              to:'/vending/credit'
             },
             {
               title: 'Recharge token',
-              icon: 'close-octagon'
+              icon: 'close-octagon',
+              to:'/vending/reset'
             },
             {
               title: 'SGC List',
