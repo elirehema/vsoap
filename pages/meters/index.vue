@@ -5,6 +5,7 @@
     :items="meters"
     sort-by="calories"
     class="elevation-1"
+    @click:row="handleRowClick"
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
@@ -121,8 +122,10 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
+      <v-container @click.stop>
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      </v-container>
     </template>
     <template v-slot:no-data>
       <v-btn elevation="0"  
@@ -226,6 +229,9 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
+    },
+    handleRowClick(v) {
+      this.$router.push(`/meters/${v.id}`);
     },
 
     save() {

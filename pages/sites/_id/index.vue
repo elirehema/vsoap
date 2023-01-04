@@ -40,11 +40,15 @@
         <tab-site-overview/>
       </v-tab-item>
       <v-tab-item>
+      <tab-site-costs/>
+      </v-tab-item>
+      <v-tab-item>
       <tab-site-meters :meters="meters"/>
       </v-tab-item>
       <v-tab-item>
       <tab-site-dcus :dcus="dcus"/>
       </v-tab-item>
+     
     </v-tabs-items>
   </v-container>
   <skeleton-summary-card v-else />
@@ -55,17 +59,19 @@
 import TabSiteOverview from "@/components/tabs/tab-site-overview.vue";
 import TabSiteMeters from "@/components/tabs/tab-site-meters.vue";
 import TabSiteDCUs from "@/components/tabs/tab-site-dcus.vue";
+import TabSiteCosts from "@/components/tabs/tab-site-costs.vue";
 export default {
   components: {
     'tab-site-overview': TabSiteOverview,
     'tab-site-meters': TabSiteMeters,
-    'tab-site-dcus': TabSiteDCUs
+    'tab-site-dcus': TabSiteDCUs,
+    'tab-site-costs': TabSiteCosts
   },
   name: "IndexPage",
   data() {
     return {
       tab: null,
-      tabs:['Overview','Meters','DCUs','Readings'],
+      tabs:['Overview','Costs','Meters','DCUs','Readings'],
       site: null,
       meters: null,
       dcus: null

@@ -24,7 +24,21 @@ const mixins = {
   data () {
     return {
      
-      loader: null
+      loader: null,
+      requesttypes:[
+        {
+          title:"Clear Tamper token",
+          value:"CLEARTAMPERTOKEN"
+        },
+        {
+          title:"Reset token",
+          value:"RESETTOKEN"
+        },
+        {
+          title:"Clear credit token",
+          value:"CREDITTOKEN"
+        }
+      ]
     }
   },
   watch: {
