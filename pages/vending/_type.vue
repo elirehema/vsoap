@@ -141,6 +141,7 @@ export default {
       ],
       editedItem: {},
       defaultItem: {},
+      vendings: null,
       rules: {
         required: (value) => !!value || "Field Required",
       },
@@ -148,7 +149,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      vendings: "vendings",
+      vending: "vendings",
       meters: "meters",
     }),
     formTitle() {
@@ -187,6 +188,7 @@ export default {
   created() {
     this.$store.dispatch("_fetchvendings");
     this.editedItem.requestType = this.type
+    this.getVendingsByType()
   },
   methods: {
     save() {
@@ -200,6 +202,13 @@ export default {
         this.editedIndex = -1;
       });
     },
+    async getVendingsByType(){
+        await this.$axios.$get(`/api/vendings/types/${ this.type.toLowerCase()}`)
+          .then((response) => {
+            this.vendings = response
+          }).catch((err) => {
+          })  
+    }
   },
 };
 </script>
