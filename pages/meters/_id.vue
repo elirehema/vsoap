@@ -172,7 +172,7 @@ export default {
       dialog: false,
       request: {},
       tab: null,
-      tabs: ["Overview", "Downlinks", "Readings"],
+      tabs: ["Overview", "Messages", "Readings"],
       meter: null,
       dcus: null,
       editedItem: {},

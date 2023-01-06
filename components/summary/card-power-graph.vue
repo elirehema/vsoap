@@ -10,12 +10,12 @@
 
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </v-app-bar>
-        <v-card-text >
+        <v-card-text class="mt-2 pa-1" >
            <v-container class="d-flex justify-center justify-space-around px-0">
-            <v-chip v-for="label in labels" :key="label" link class=" py-6 font-weight-bold primary--text" color="#EAEAEA" label> {{ label.toUpperCase() }}</v-chip>
+            <v-chip v-for="label in labels" :key="label" link class="py-6 font-weight-bold primary--text d-flex justify-space-around" color="#EAEAEA" label> {{ label.toUpperCase() }}</v-chip>
            </v-container>
 
-           <div class="d-flex flex-column  align-center mt-4">
+           <div class="d-flex flex-column  align-center mt-9">
            <span class="gold--text text--darken-3 text-h5 ">{{ power.line }}</span>
            <span class="text-h4 mt-3">{{ power.value }} kWh</span>
            

@@ -48,7 +48,7 @@ export default {
                     total:{
                         show: true,
                         label: this.data.value,
-                        fontSize: '39px',
+                        fontSize: '24px',
                         fontFamily: '"Mulish", sans-serif',
                         fontWeight: 600,
                     }

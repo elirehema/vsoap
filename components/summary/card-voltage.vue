@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="voltage"  rounded>
+    <v-card v-if="voltage" height="260"  rounded>
         <v-app-bar color="white" dense flat>
             <v-toolbar-title class="pl-0">
                {{ voltage.title }}
@@ -11,8 +11,8 @@
         </v-app-bar>
         <v-card-text >
            
-           <chart-semi-donut :data="voltage" />
-           <v-container class="d-flex justify-center ma-0 pa-0">
+           <chart-semi-donut :data="voltage" :height="220" />
+           <v-container class="d-flex justify-center ma-0 pa-0 mt-2">
         <span class="text-h5 gold--text text--darken-2">{{ voltage.line.toUpperCase() }}</span>
         </v-container>
         </v-card-text>

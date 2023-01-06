@@ -17,7 +17,7 @@ const mixins = {
     'chart-smooth-line': () => import('@/components/charts/apex-smooth-line.vue'),
     'chart-semi-donut':()=> import('@/components/charts/apex-semi-donut.vue'),
     'summarycard': () => import('@/components/charts/summary-card.vue'),
-    'summary-power': () => import('@/components/summary/card-power.vue'),
+    'summary-power': () => import('~/components/summary/card-power-graph.vue'),
     'summary-voltage': () => import('@/components/summary/card-voltage.vue'),
     'summary-consumption': () => import('@/components/summary/card-consuption.vue')
   },
