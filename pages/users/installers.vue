@@ -50,6 +50,21 @@
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
+                  <v-select
+                    v-model="editedItem.agentId"
+                    :items="agents"
+                    :item-text="'displayName'"
+                    :item-value="'id'"
+                    label="Select Agent"
+                    v-on:focus="$store.dispatch('_fetchagents')"
+                    :rules="[rules.required]"
+                    name="editedItem.agentId"
+                    persistent-hint
+                    single-line
+                  >
+                  </v-select>
+                </v-col>
+                  <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       v-model="editedItem.mobileNumber"
                       label="Phone Number"
@@ -138,6 +153,7 @@ export default {
         { text: "Display Name", value: "displayName" },
         { text: "Mobile No.", value: "mobileNumber" },
         { text: "Email", value: "email" },
+        { text: "Agent", value: "Agent.displayName" },
         { text: "Type", value: "userType" },
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
@@ -152,11 +168,15 @@ export default {
       defaultItem: {
         userType:"INSTALLER"
       },
+      rules: {
+        required: (value) => !!value || "Field Required",
+      },
     };
   },
   computed: {
     ...mapGetters({
       installers: "installers",
+      agents :"agents"
     }),
     formTitle() {
       return this.editedIndex === -1 ? "Add new installer" : "Edit installer";
