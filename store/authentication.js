@@ -46,14 +46,7 @@ const actions = {
         commit("AUTHENTICATE_ERROR");
       });
   },
-  async _createnewuser({ dispatch }, payload) {
-    await this.$axios
-      .$post("/api/users/register", payload)
-      .then((response) => {
-        dispatch("_fetchusers", null, { root: true });
-      })
-      .catch((err) => {});
-  },
+ 
 
   async _logoutsession({ commit }) {
     await commit("LOGOUT_SESSION");

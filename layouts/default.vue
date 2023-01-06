@@ -9,6 +9,7 @@
       dark
       app
       height="100%"
+      width="300"
       style="max-height: 99.6%;"
     >
       <v-list>
@@ -238,6 +239,7 @@ export default {
               to: '/customers'
             },
           
+          
           ]
         },
         {
@@ -247,7 +249,17 @@ export default {
             {
               title: 'Users',
               icon: 'account-cog',
-              to: '/users'
+              to: '/users/'
+            },
+            {
+              title: 'Agents',
+              icon: 'account-multiple-plus',
+              to: '/users/agents'
+            },
+            {
+              title: 'Installers',
+              icon: 'hexagon-multiple-outline',
+              to: '/users/installers'
             },
           
           ]

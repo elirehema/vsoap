@@ -1,15 +1,22 @@
 <template>
-  <v-data-table :headers="headers" :items="users" sort-by="calories" class="elevation-1">
+  <v-data-table
+    :headers="headers"
+    :items="installers"
+    sort-by="calories"
+    class="elevation-1"
+  >
     <template v-slot:top>
       <v-toolbar flat color="primary">
-        <v-toolbar-title class="text-h4 white--text">System Users</v-toolbar-title>
+        <v-toolbar-title class="text-h4 white--text"
+          >Installers</v-toolbar-title
+        >
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
-              Add User
+              Add Installer
             </v-btn>
           </template>
           <v-card>
@@ -78,8 +85,12 @@
             >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete"
+                >Cancel</v-btn
+              >
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                >OK</v-btn
+              >
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -91,21 +102,21 @@
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
     <template v-slot:item.CreatedAt="{ item }">
-      <span>{{ item.CreatedAt | dateformat }}</span>
+      <span>{{ item.createdAt | dateformat }}</span>
     </template>
     <template v-slot:no-data>
-      <v-btn elevation="0"  
-      :loading="loading"
-      :disabled="loading"
-       @click="(loader = 'loading'),($store.dispatch('_fetchusers'))"
-       small rounded class="white--text text-capitalize" color="blue-grey">
-        <v-icon
-        left
-        dark
+      <v-btn
+        elevation="0"
+        :loading="loading"
+        :disabled="loading"
+        @click="(loader = 'loading'), $store.dispatch('_fetchinstallers')"
+        small
+        rounded
+        class="white--text text-capitalize"
+        color="blue-grey"
       >
-        mdi-cloud-download
-      </v-icon>
-      Reload  
+        <v-icon left dark> mdi-cloud-download </v-icon>
+        Reload
       </v-btn>
     </template>
   </v-data-table>
@@ -127,6 +138,7 @@ export default {
         { text: "Display Name", value: "displayName" },
         { text: "Mobile No.", value: "mobileNumber" },
         { text: "Email", value: "email" },
+        { text: "Type", value: "userType" },
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
       ],
@@ -134,36 +146,41 @@ export default {
       loading: false,
       desserts: [],
       editedIndex: -1,
-      editedItem: {},
-      defaultItem: {},
+      editedItem: {
+        userType:"INSTALLER"
+      },
+      defaultItem: {
+        userType:"INSTALLER"
+      },
     };
   },
   computed: {
     ...mapGetters({
-      users: "users",
+      installers: "installers",
     }),
     formTitle() {
-      return this.editedIndex === -1 ? "Add new user" : "Edit user";
+      return this.editedIndex === -1 ? "Add new installer" : "Edit installer";
     },
   },
   created() {
-    this.$store.dispatch("_fetchusers");
+    this.$store.dispatch("_fetchinstallers");
   },
   methods: {
     editItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.installers.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.editedItem.userType = "INSTALLER";
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.installers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.users.splice(this.editedIndex, 1);
+      this.installers.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
