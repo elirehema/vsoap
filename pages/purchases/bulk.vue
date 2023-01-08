@@ -77,7 +77,7 @@
                       @click="makeOrderPayment(400)"
                       block
                     >
-                      <v-icon left>mdi-account-credit-card</v-icon>Make Payment</v-btn
+                      <v-icon left>mdi-account-credit-card</v-icon>Approve Payment</v-btn
                     >
                   </v-col>
                   <v-col v-if="editedItem.statusCode != '400'" cols="12" sm="12">
