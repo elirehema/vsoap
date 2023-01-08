@@ -1,6 +1,8 @@
 const state = () => ({
   showLoader: Boolean,
   accessToken: null,
+  userrole: null,
+  userpermissions: null
 });
 
 const mutations = {
@@ -15,12 +17,11 @@ const mutations = {
   },
   ["AUTHENTICATE_SUCCESS"](state, payload) {
     state.showLoader = false;
-
-    console.log(payload.accessToken)
     if (payload.accessToken != undefined) {
       state.accessToken = payload.accessToken;
       localStorage.setItem("accessToken", payload.accessToken);
-      //document.cookie = `current_subject=user::${payload.username}; SameSite=None; Secure`;
+      state.userpermissions = payload.permissions;
+      state.userrole = payload.roles[0]
     
       this.$router.push("/");
     }else{
@@ -59,6 +60,8 @@ const getters = {
   isAuthenticated: function (state) {
     return state.accessToken != null;
   },
+  userpermissions: (state) => { return state.userpermissions },
+  userrole: (state) => { return state.userrole },
 };
 
 export default {

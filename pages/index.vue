@@ -4,7 +4,6 @@
       <summarycard v-for="(summary, i) in summaries" :key="i" :data="summary" />
     </v-row>
     <v-row class="mt-4">
-
       <v-col cols="12" sm="12" md="8" class="pa-1 ma-0">
       <v-row>
       <v-col  v-for="i in 4" :key="i">
@@ -41,7 +40,7 @@
        </v-row>
       </v-col>
 
-     
+     JUUUUUUUUUU  {{ $rules.hasPermission('user.read','user.write') }}
 
     </v-row>
   </v-container>
