@@ -46,6 +46,48 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="permissiondialog" max-width="650px">
+         
+          <v-card>
+            <v-toolbar color="primary" flat dark>
+              <v-toolbar-title class="text-h4 white--text"
+                ><span class="text-h5">Add Permissions</span></v-toolbar-title
+              >
+
+              <v-spacer></v-spacer>
+            </v-toolbar>
+
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" >
+                    <v-select
+                    v-model="editedItem.permissions"
+                    :items="permissions"
+                    :item-text="'name'"
+                    :item-value="'id'"
+                    label="Select Permission"
+                    v-on:focus="$store.dispatch('_fetchpermissions')"
+                    :rules="[rules.required]"
+                    name="editedItem.permissions"
+                    persistent-hint
+                    single-line
+                    multiple
+                    chips small-chips
+                  >
+                  </v-select>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
+              <v-btn color="blue darken-1" text @click="addpermission"> Save </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.updatedAt="{ item }">
@@ -57,10 +99,13 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+      <v-btn color="blue" dark  class="text-capitalize" x-small  @click="addPermissions(item)"> Add Permissions </v-btn>
+      
       <v-btn color="gold"  class="text-capitalize" x-small v-if="!item.active" @click="activateRole(item, true)"> activate </v-btn>
       <v-btn  color="warning" class="text-capitalize" x-small v-else @click="activateRole(item,false)"> De-activate </v-btn>
      
     </template>
+   
     <template v-slot:item.status="{ item }">
         <v-icon small v-if="item.active" color="blue"> mdi-check-decagram</v-icon>
         <v-icon small v-else color="black darken-1"> mdi-close-circle</v-icon>
@@ -75,10 +120,14 @@ export default {
   data() {
     return {
       dialog: false,
+      permissiondialog:false,
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
       switcha: false,
+      rules: {
+        required: value => !!value || "Field Required",
+      },
       headers: [
         {
           text: "ID",
@@ -121,11 +170,15 @@ export default {
         roleId: item.id,
         action : valid ? "activate" :"deactivate"
       })
-      
+    },
+    addPermissions(item){
+      this.permissiondialog = true
+      this.editedItem = Object.assign({}, item);
     },
 
     close() {
       this.dialog = false;
+      this.permissiondialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
@@ -138,6 +191,11 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
+    },
+    addpermission(){
+      console.log(this.editedItem)
+      this.$store.dispatch('_addpermissions', {id: this.editedItem.id, data: this.editedItem.permissions})
+      this.close()
     },
 
     save() {

@@ -46,7 +46,14 @@ const state = () => ({
             dispatch("_fetchroles", null, { root: true });
           }).catch((err) => {
           })
-      }
+      },
+      async _addpermissions ({ dispatch }, payload) {
+        await this.$axios.$post(`/api/roles/${payload.id}/permissions`, payload.data)
+          .then((response) => {
+            dispatch("_fetchroles", null, { root: true });
+          }).catch((err) => {
+          })
+      },
   }
   
   const getters = {
