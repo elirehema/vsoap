@@ -1,4 +1,11 @@
 <template>
-
-    <h1>INDEX PAGE</h1>
+    <roles-component/>
 </template>
+<script>
+import RolesComponent from "@/pages/settings/index.vue"
+export default {
+    components:{
+        'roles-component': RolesComponent
+    }
+}
+</script>

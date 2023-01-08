@@ -1,7 +1,7 @@
 <template>
-  <v-row>
+  <v-row no-gutters>
     <v-col cols="3">
-      <v-card class="mx-auto" max-width="400" >
+      <v-card class="mx-4" >
         <v-list nav dense>
           <v-list-item-group color="primary" two-line>
             <template v-for="(item, index) in routes">
