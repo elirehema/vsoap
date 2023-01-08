@@ -20,7 +20,7 @@
             <span class="text-h6 font-weight-bold">Average power factor</span>
           </v-card-title>
           <v-card-text>
-            <chart-line height="450" :data="splinedata" />
+            <chart-line :height="450" :data="splinedata" />
           </v-card-text>
         </v-card>
       </v-col>

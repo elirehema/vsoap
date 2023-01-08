@@ -53,7 +53,7 @@
                 <span class="text-h6">Average power factor in year</span>
               </v-card-title>
               <v-card-text>
-                <chart-line height="450" :data="splinedata" />
+                <chart-line :height="450" :data="splinedata" />
               </v-card-text>
             </v-card>
           </v-col>

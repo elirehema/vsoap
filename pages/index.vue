@@ -20,7 +20,7 @@
             <span class="text-h6 font-weight-bold">Credit Vs Token purchases</span>
           </v-card-title>
           <v-card-text>
-            <chart-area-spline height="450" :data="splinedata" />
+            <chart-area-spline :height="450" :data="splinedata" />
           </v-card-text>
         </v-card>
       </v-col>
