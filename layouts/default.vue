@@ -314,7 +314,8 @@ export default {
          
             {
               title: 'Settings',
-              icon: 'cog'
+              icon: 'cog',
+              to: '/settings'
             }
           ]
         },

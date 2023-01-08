@@ -155,6 +155,7 @@ export default {
         { text: "Email", value: "email" },
         { text: "Agent", value: "Agent.displayName" },
         { text: "Type", value: "userType" },
+        { text: "Role", value: "role.name" },
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
       ],

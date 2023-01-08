@@ -139,6 +139,7 @@
           { text: "Mobile No.", value: "mobileNumber" },
           { text: "Email", value: "email" },
           { text: "Type", value: "userType" },
+          { text: "Role", value: "role.name" },
           { text: "Created On", value: "createdAt" },
           { text: "Actions", value: "actions", sortable: false },
         ],
