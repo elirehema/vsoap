@@ -14,7 +14,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
               <v-icon left> mdi-plus </v-icon>
-              Add Role
+              Add new Role
             </v-btn>
           </template>
           <v-card>

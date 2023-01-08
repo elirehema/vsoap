@@ -53,7 +53,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/vuetify.js',
-    '~/plugins/aaxios',
+    '~/plugins/axios',
     '~/plugins/filters.js',
     '~/plugins/pwa.client.js',
     '~/plugins/vue-apexcharts.js',
