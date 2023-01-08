@@ -2,7 +2,8 @@ const state = () => ({
   showLoader: Boolean,
   accessToken: null,
   userrole: null,
-  userpermissions: null
+  userpermissions: null,
+  realm: null
 });
 
 const mutations = {
@@ -22,7 +23,7 @@ const mutations = {
       localStorage.setItem("accessToken", payload.accessToken);
       state.userpermissions = payload.permissions;
       state.userrole = payload.roles[0]
-    
+      state.realm = payload.realm
       this.$router.push("/");
     }else{
      // window.location.reload(true)
@@ -62,6 +63,7 @@ const getters = {
   },
   userpermissions: (state) => { return state.userpermissions },
   userrole: (state) => { return state.userrole },
+  realm: (state) => { return state.realm },
 };
 
 export default {

@@ -103,7 +103,7 @@
       </v-btn>
       <v-btn
         icon
-        dark to="/dashboard/a"
+        dark to="/dashboard/tenant"
       >
         <v-icon>mdi-selection</v-icon>
       </v-btn>

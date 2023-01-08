@@ -98,7 +98,7 @@
                       @click="generateControlNumber"
                       :loading="loading"
                       :disabled="loading"
-                      >Generate Token</v-btn
+                      >Generate Control Number</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -186,7 +186,7 @@
                 @click="generateControlNumber"
                 :loading="loading"
                 :disabled="loading"
-                >Generate Token</v-btn
+                >Generate Control Number</v-btn
               >
               <v-btn color="warning darken-1" small class="px-5" @click="save">
                 Place
