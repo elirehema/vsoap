@@ -39,8 +39,10 @@
                       label="Control number"
                       :readOnly="!generatebutton"
                       :rules="[(v) => !!v || 'Control Number is required']"
-                      clearable
+                      
+                      append-icon="mdi-cog-clockwise"
                       @click:clear="generatebutton = true"
+                      @click:append="generateControlNumber"
                     ></v-text-field>
                   </v-col>
                   <v-col v-if="editedItem.statusCode == '100'" cols="12" sm="12">
@@ -88,7 +90,7 @@
                       >Cancel purchase</v-btn
                     >
                   </v-col>
-                  <v-col cols="12" sm="12" v-if="editedItem.statusCode == '200'">
+                  <v-col cols="12" sm="12" v-if="editedItem.statusCode == '200' && false">
                     <v-btn
                       block
                       v-if="generatebutton"
@@ -165,6 +167,7 @@
                         :readOnly="!generatebutton"
                         :rules="[(v) => !!v || 'Control Number is required']"
                         clearable
+                        prepend-icon="mdi-reload"
                         @click:clear="generatebutton = true"
                       ></v-text-field>
                     </v-col>
@@ -186,7 +189,8 @@
                 @click="generateControlNumber"
                 :loading="loading"
                 :disabled="loading"
-                >Generate Control Number</v-btn
+                >
+                Generate Control Number</v-btn
               >
               <v-btn color="warning darken-1" small class="px-5" @click="save">
                 Place
