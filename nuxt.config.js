@@ -54,6 +54,7 @@ export default {
   plugins: [
     '~/plugins/vuetify.js',
     '~/plugins/axios',
+    '~/plugins/permissions.js',
     '~/plugins/filters.js',
     '~/plugins/pwa.client.js',
     '~/plugins/vue-apexcharts.js',

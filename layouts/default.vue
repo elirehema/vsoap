@@ -72,6 +72,7 @@
             :to="child.to"
             color="white"
             class="pl-9"
+            v-if="$rules.hasPermission(child.p)"
           >
             <v-list-item-icon>
               <v-icon>{{ 'mdi-'+ child.icon }}</v-icon>
@@ -202,7 +203,8 @@ export default {
             {
               title: 'Meters',
               icon: 'gauge',
-              to:'/meters'
+              to:'/meters',
+              p: 'meter.read,meter.create'
             },
             {
               title: 'Meter Types',

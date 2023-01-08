@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    v-if="meters"
+    v-if="meters && $rules.hasPermission('meter.read')"
     :headers="headers"
     :items="meters"
     sort-by="calories"
@@ -20,6 +20,7 @@
               class="mb-2 font-weight-bold"
               v-bind="attrs"
               v-on="on"
+              v-if="$rules.hasPermission('meter.create')"
             >
               <v-icon left> mdi-plus </v-icon>
               Add new meter
@@ -123,8 +124,8 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-container @click.stop>
-      <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-      <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      <v-icon small v-if="$rules.hasPermission('meter.update')" class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+      <v-icon small v-if="$rules.hasPermission('meter.delete')" @click="deleteItem(item)"> mdi-delete </v-icon>
       </v-container>
     </template>
     <template v-slot:no-data>
