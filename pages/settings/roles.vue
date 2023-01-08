@@ -60,20 +60,22 @@
             <v-card-text>
               <v-container>
                 <v-row>
+                
                   <v-col cols="12" sm="12" >
                     <v-select
-                    v-model="editedItem.permissions"
+                    multiple
+                    chips
+                    v-model="perms"
                     :items="permissions"
                     :item-text="'name'"
                     :item-value="'id'"
                     label="Select Permission"
                     v-on:focus="$store.dispatch('_fetchpermissions')"
                     :rules="[rules.required]"
-                    name="editedItem.permissions"
                     persistent-hint
-                    single-line
-                    multiple
-                    chips small-chips
+                    small-chips
+                    
+                    
                   >
                   </v-select>
                   </v-col>
@@ -122,9 +124,17 @@ export default {
       dialog: false,
       permissiondialog:false,
       editedIndex: -1,
-      editedItem: {},
-      defaultItem: {},
-      switcha: false,
+      editedItem: {
+        name: '',
+        
+        permissions: 44444444444
+      },
+      perms: [],
+      defaultItem: {
+        name: '',
+        permissions:[]
+      },
+      
       rules: {
         required: value => !!value || "Field Required",
       },
@@ -161,7 +171,6 @@ export default {
     editItem(item) {
       this.editedIndex = this.roles.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.editedItem.userType = "AGENT";
       this.dialog = true;
     },
 
@@ -171,9 +180,16 @@ export default {
         action : valid ? "activate" :"deactivate"
       })
     },
-    addPermissions(item){
-      this.permissiondialog = true
-      this.editedItem = Object.assign({}, item);
+    async addPermissions(item){
+      await this.$axios.$get(`/api/roles/${item.id}`, )
+        .then((response) => {
+          this.perms = response.ids
+          this.editedItem.permissions = response.ids;
+          this.permissiondialog = true;
+          this.editedItem = Object.assign({}, item);
+        }).catch((err) => {
+        })
+     ;
     },
 
     close() {
@@ -185,16 +201,8 @@ export default {
       });
     },
 
-    closeDelete() {
-      this.dialogDelete = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
     addpermission(){
-      console.log(this.editedItem)
-      this.$store.dispatch('_addpermissions', {id: this.editedItem.id, data: this.editedItem.permissions})
+      this.$store.dispatch('_addpermissions', {id: this.editedItem.id, data: this.perms})
       this.close()
     },
 
