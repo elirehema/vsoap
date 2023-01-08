@@ -91,7 +91,7 @@
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
     <template v-slot:item.CreatedAt="{ item }">
-      <span>{{ item.CreatedAt | dateformat }}</span>
+      <span>{{ item.createdAt | dateformat }}</span>
     </template>
     <template v-slot:no-data>
       <v-btn elevation="0"  
@@ -127,6 +127,7 @@ export default {
         { text: "Display Name", value: "displayName" },
         { text: "Mobile No.", value: "mobileNumber" },
         { text: "Email", value: "email" },
+        { text: "Role", value: "role.name" },
         { text: "Created On", value: "CreatedAt" },
         { text: "Actions", value: "actions", sortable: false },
       ],
