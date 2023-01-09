@@ -1,8 +1,8 @@
 <template>
   <v-container fluid class="pa-0 ma-0" v-if="meter">
     <v-toolbar color="primary" dark flat prominent>
-      <v-btn icon class="hidden-xs-only">
-        <v-icon>mdi-counter</v-icon>
+      <v-btn icon class="hidden-xs-only mt-2 ml-2">
+        <v-icon x-large>mdi-dots-circle</v-icon>
       </v-btn>
 
       <v-toolbar-title class="text-h6 font-weight-bold">{{
@@ -15,7 +15,19 @@
           <v-btn
             color="success"
             dark
-            class="mb-2 font-weight-bold"
+            class="mt-2 font-weight-bold ml-2"
+            @click="request = requesttypes[3]"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon left> mdi-plus </v-icon>
+            Key Change token
+          </v-btn> 
+
+          <v-btn
+            color="success"
+            dark
+            class="mt-2 font-weight-bold"
             @click="request = requesttypes[0]"
             v-bind="attrs"
             v-on="on"
@@ -26,7 +38,7 @@
           <v-btn
             color="success"
             dark
-            class="mb-2 mx-2 font-weight-bold"
+            class="mt-2 mx-2 font-weight-bold"
             @click="request = requesttypes[1]"
             v-bind="attrs"
             v-on="on"
@@ -38,14 +50,15 @@
           <v-btn
             color="success"
             dark
-            class="mb-2 font-weight-bold"
+            class="mt-2 font-weight-bold "
             @click="request = requesttypes[2]"
             v-bind="attrs"
             v-on="on"
           >
             <v-icon left> mdi-plus </v-icon>
-            Clear credit token
+            Credit token
           </v-btn>
+        
         </template>
         <v-card>
           <v-toolbar color="primary" flat dark>
@@ -148,7 +161,10 @@
         <tab-meter-overview />
       </v-tab-item>
       <v-tab-item>
-        <tab-site-meters :meters="meters" />
+        <skeleton-table-loader />
+      </v-tab-item>
+      <v-tab-item>
+      <tab-vending :vendings="vendings"/>
       </v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -159,12 +175,14 @@
 import TabMeterOverview from "@/components/tabs/tab-meter-overview.vue";
 import TabSiteMeters from "@/components/tabs/tab-site-meters.vue";
 import TabSiteDCUs from "@/components/tabs/tab-site-dcus.vue";
+import TabVendingComponent from "@/components/tabs/tab-vending-table.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     "tab-meter-overview": TabMeterOverview,
     "tab-site-meters": TabSiteMeters,
     "tab-site-dcus": TabSiteDCUs,
+    "tab-vending": TabVendingComponent,
   },
   name: "IndexPage",
   data() {
@@ -172,11 +190,12 @@ export default {
       dialog: false,
       request: {},
       tab: null,
-      tabs: ["Overview", "Messages", "Readings"],
+      tabs: ["Overview", "Messages", "Vendings"],
       meter: null,
       dcus: null,
       editedItem: {},
       defaultItem: {},
+      vendings: null,
       rules: {
         required: (value) => !!value || "Field Required",
       },
@@ -202,6 +221,7 @@ export default {
         .then((response) => {
           this.meter = response;
           this.editedItem.meterSerialNumber = response.serialNumber;
+          this.getMeterVendings(response.serialNumber)
         })
         .catch((err) => {});
     },
@@ -215,6 +235,14 @@ export default {
         .catch((err) => {});
     },
 
+    async getMeterVendings(serialNumber){
+      await this.$axios
+        .$get(`/api/vendings/meter/${serialNumber}`)
+        .then((response) => {
+          this.vendings = response;
+        })
+        .catch((err) => {});
+    },
     save() {
         this.$store.dispatch("_sendvendingrequest", this.editedItem)
         this.close()

@@ -8,7 +8,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat color="primary">
-          <v-toolbar-title class="text-h4 white--text">Payment Notifications</v-toolbar-title>
+          <v-toolbar-title class="text-h5 font-weight-bold white--text">Payment Notifications</v-toolbar-title>
   
           <v-spacer></v-spacer>
          
