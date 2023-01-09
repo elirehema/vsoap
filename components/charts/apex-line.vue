@@ -97,7 +97,7 @@ export default {
         },
         yaxis: {
           title: {
-            text: "Temperature",
+            text: "Total",
           },
           min: 0,
         },

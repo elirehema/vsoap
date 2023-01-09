@@ -1,0 +1,12 @@
+thead{
+    background-color: #242f52;
+    & tr{
+        & th{
+            span{
+                color: white;
+                font-weight: bold;
+                font-size: 2.5em;
+            }
+        }
+    }
+}

@@ -5,11 +5,15 @@
     :items="vendings"
     sort-by="calories"
     class="elevation-1"
+    item-key="id"
+    :single-expand="singleExpand"
+    :expanded.sync="expanded"
+    show-expand
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h5 font-weight-bold white--text"
-          >Vending Requests</v-toolbar-title
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">
+          {{ formTitle }} Vending Requests</v-toolbar-title
         >
 
         <v-spacer></v-spacer>
@@ -23,7 +27,7 @@
               v-on="on"
             >
               <v-icon left> mdi-plus </v-icon>
-              {{ formTitle  }}
+              {{ formTitle }}
             </v-btn>
           </template>
           <v-card>
@@ -56,10 +60,11 @@
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       v-model="editedItem.units"
-                      label="Total Units" type="number"
+                      label="Total Units"
+                      type="number"
                     ></v-text-field>
                   </v-col>
-               
+
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       v-model="editedItem.transactionRef"
@@ -75,13 +80,15 @@
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       v-model="editedItem.requestType"
-                      label="Request Type (Read-Only)" readonly
+                      label="Request Type (Read-Only)"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       value="kWh"
-                      label="Unit Measure (Read-Only)" readonly
+                      label="Unit Measure (Read-Only)"
+                      readonly
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -98,7 +105,7 @@
       </v-toolbar>
     </template>
     <template v-slot:item.units="{ item }">
-    <span>{{ item.units }}-{{ item.UnitMeasure }}</span>
+      <span>{{ item.units }}-{{ item.UnitMeasure }}</span>
     </template>
     <template v-slot:no-data>
       <v-btn
@@ -115,6 +122,18 @@
         Reload
       </v-btn>
     </template>
+    <template v-slot:expanded-item="{ headers, item }">
+      <td :colspan="3">
+        Token: <span class="font-weight-bold primary--text">{{ item.response.token }}</span>
+      </td>
+      <td :colspan="1">
+        Status: <v-icon :color="item.response.status === 200 ? 'blue':'black'" small right> {{ item.response.status === 200 ?  'mdi-check-decagram' : 'mdi-close-circle'}}</v-icon>
+      </td>
+      <td :colspan="2">
+        <span class="font-weight-bold">Description:</span> {{ item.response.description}}
+      </td>
+    </template>
+    
   </v-data-table>
   <skeleton-table-loader v-else />
 </template>
@@ -124,7 +143,9 @@ export default {
   data() {
     return {
       loading: false,
-      dialog:false,
+      dialog: false,
+      expanded: [],
+      singleExpand: true,
       headers: [
         {
           text: "ID",
@@ -138,6 +159,7 @@ export default {
         { text: "Units", value: "units" },
         { text: "Payment Ref", value: "paymentReference" },
         { text: "Transaction Ref", value: "transactionRef" },
+        { text: '', value: 'data-table-expand' },
       ],
       editedItem: {},
       defaultItem: {},
@@ -153,33 +175,39 @@ export default {
       meters: "meters",
     }),
     formTitle() {
-        var t = this.$route.params.type;
+      var t = this.$route.params.type;
       var tp = "Reset token";
       switch (t) {
         case "tamper":
-          tp =  "Clear tamper token";
+          tp = "Clear tamper token";
           break;
         case "reset":
-          tp =  "Reset token";
+          tp = "Reset token";
           break;
         case "credit":
-          tp =  "Clear credit token";
+          tp = "Credit token";
+          break;
+        case "key":
+          tp = "Key Change Token";
           break;
       }
       return tp;
     },
     type() {
       var t = this.$route.params.type;
-      var tp = "RESETTOKEN";
+      var tp = "ResetToken";
       switch (t) {
         case "tamper":
-          tp = "CLEARTAMPERTOKEN";
+          tp = "ClearTamperToken";
           break;
         case "reset":
-          tp = "RESETTOKEN";
+          tp = "ResetToken";
           break;
         case "credit":
-          tp = "CREDITTOKEN";
+          tp = "CreditToken";
+          break;
+        case "key":
+          tp = "KeyChangeToken";
           break;
       }
       return tp;
@@ -187,13 +215,15 @@ export default {
   },
   created() {
     this.$store.dispatch("_fetchvendings");
-    this.editedItem.requestType = this.type
-    this.getVendingsByType()
+    this.editedItem.requestType = this.type;
+    this.getVendingsByType();
   },
   methods: {
     save() {
-        this.$store.dispatch("_sendvendingrequest", this.editedItem)
-        this.close()
+      this.$store.dispatch("_sendvendingrequest", this.editedItem).then(()=>{
+        this.close();
+      });
+      
     },
     close() {
       this.dialog = false;
@@ -201,14 +231,18 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
+     
+      this.getVendingsByType();
+      
     },
-    async getVendingsByType(){
-        await this.$axios.$get(`/api/vendings/types/${ this.type.toLowerCase()}`)
-          .then((response) => {
-            this.vendings = response
-          }).catch((err) => {
-          })  
-    }
+    async getVendingsByType() {
+      await this.$axios
+        .$get(`/api/vendings/types/${this.type.toLowerCase()}`)
+        .then((response) => {
+          this.vendings = response;
+        })
+        .catch((err) => {});
+    },
   },
 };
 </script>

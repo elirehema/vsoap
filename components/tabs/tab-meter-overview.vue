@@ -122,8 +122,8 @@ export default {
           measure: null,
           value: "2.7 kWh",
           color: "primary",
-          subtitle: "Total number of registered clients",
-          icon: "mdi-account-group",
+          subtitle: "Totat units",
+          icon: "mdi-altimeter",
         },
 
         {
