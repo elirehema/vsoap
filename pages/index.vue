@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-0 ma-0" fluid>
    <vendor-dashboard v-if="$rules.hasRealm('VENDOR')"/>
-   <tenant-dashboard v-if="$rules.hasRealm('USER')"/>
+   <tenant-dashboard v-if="$rules.hasRealm('TENANT')"/>
   </v-container>
 
 </template>
