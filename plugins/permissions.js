@@ -2,6 +2,7 @@ export default ({ app, store }, inject) => {
   inject("rules", {
     hasPermission(s) {
       if (s) {
+        s = s.concat(",all")
         var p = s.split(",");
         if (store.getters.userpermissions) {
           const found = p.some((r) =>
