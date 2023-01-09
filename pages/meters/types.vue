@@ -8,7 +8,7 @@
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h4 white--text"
+        <v-toolbar-title class="text-h5 font-weight-bold white--text"
           >Meter Types</v-toolbar-title
         >
 
@@ -116,7 +116,7 @@ export default {
           text: "Actions",
           value: "actions",
           sortable: false,
-          class: "d-flex justify-end",
+          align: 'center'
         },
       ],
       desserts: [],

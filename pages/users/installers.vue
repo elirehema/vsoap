@@ -7,7 +7,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="primary">
-        <v-toolbar-title class="text-h4 white--text"
+        <v-toolbar-title class="text-h5 font-weight-bold white--text"
           >Installers</v-toolbar-title
         >
 

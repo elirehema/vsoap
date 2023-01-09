@@ -8,7 +8,7 @@
   >
     <template v-slot:top>
       <v-toolbar color="primary" flat>
-        <v-toolbar-title class="text-h4 white--text">Roles</v-toolbar-title>
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">Roles</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">

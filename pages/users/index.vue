@@ -2,7 +2,7 @@
   <v-data-table :headers="headers" :items="users" sort-by="calories" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat color="primary">
-        <v-toolbar-title class="text-h4 white--text">System Users</v-toolbar-title>
+        <v-toolbar-title class="text-h5 font-weight-bold white--text">System Users</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="650px">

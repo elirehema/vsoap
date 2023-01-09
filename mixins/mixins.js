@@ -28,15 +28,19 @@ const mixins = {
       requesttypes:[
         {
           title:"Clear Tamper token",
-          value:"CLEARTAMPERTOKEN"
+          value:"ClearTamperToken"
         },
         {
           title:"Reset token",
-          value:"RESETTOKEN"
+          value:"ResetToken"
         },
         {
-          title:"Clear credit token",
-          value:"CREDITTOKEN"
+          title:"Credit token",
+          value:"CreditToken"
+        },
+        {
+          title:"Key Change token",
+          value:"KeyChangeToken"
         }
       ]
     }
