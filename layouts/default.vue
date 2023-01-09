@@ -287,6 +287,11 @@ export default {
               to:'/vending/reset'
             },
             {
+              title: 'Key Change Token',
+              icon: 'progress-close',
+              to:'/vending/key'
+            },
+            {
               title: 'SGC List',
               icon: 'qrcode'
             },
