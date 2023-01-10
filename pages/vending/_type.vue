@@ -123,14 +123,17 @@
       </v-btn>
     </template>
     <template v-slot:expanded-item="{ headers, item }">
-      <td :colspan="3">
+      <td :colspan="2">
         Token: <span class="font-weight-bold primary--text">{{ item.response.token }}</span>
+      </td>
+      <td :colspan="1">
+        <span class="font-weight-bold">Serial No.:</span> {{ item.response.meterSerialNumber}}
       </td>
       <td :colspan="1">
         Status: <v-icon :color="item.response.status === 200 ? 'blue':'black'" small right> {{ item.response.status === 200 ?  'mdi-check-decagram' : 'mdi-close-circle'}}</v-icon>
       </td>
       <td :colspan="2">
-        <span class="font-weight-bold">Description:</span> {{ item.response.description}}
+        <span class="font-weight-bold">Description:</span> &nbsp;{{ item.response.description}}
       </td>
     </template>
     
