@@ -32,12 +32,12 @@ export default {
       { name: "apple-mobile-web-app-status-bar-style", content: "#A0D18C" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-      { hid: 'description', name: 'description', content: 'Payless Yangu self-service Web Application' },
+      { hid: 'description', name: 'description', content: 'Payless smart metering application' },
 
       //Twitter meta-data
       { hid: "twitter:site", name: "twitter:site", content: "PaylessApp" },
       { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
-      { hid: "twitter:image:alt", name: "twitter:image:alt", content: "Ospic application" },
+      { hid: "twitter:image:alt", name: "twitter:image:alt", content: "Payless application" },
 
     ],
     link: [

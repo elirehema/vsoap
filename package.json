@@ -1,8 +1,8 @@
 {
-  "name": "amalayangu",
+  "name": "payless",
   "version": "1.0.0",
   "private": true,
-  "description": "Amala Self service webb app",
+  "description": "Smart metering redefined",
   "scripts": {
     "dev": "NODE_ENV=dev nuxt",
     "builddev": "NODE_ENV=dev nuxt build",
