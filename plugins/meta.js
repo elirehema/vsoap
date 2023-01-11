@@ -1,8 +1,8 @@
 const type = "website";
-const url = "https://amala.co.tz";
-const title = "Amala Yangu";
-const description = "Amala Yangu web application";
-const mainImage = "https://amalatechnologies.github.io/ssap/preview.png";
+const url = "https://ams-app.nexiss.cloud";
+const title = "Payless";
+const description = "Payless application";
+const mainImage = "https://ams-app.nexiss.cloud/preview.jpg";
 
 
 export default (meta) => {
